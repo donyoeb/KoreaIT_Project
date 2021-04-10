@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+#wrapper{
+    width:1000px;
+    height:800px;
+    border:5px solid black;
+    background: url("./images/hologram.jpg");
+    background-repeat: no-repeat;
+    background-size: 1000px 800px;
+    margin: auto;
+    text-align: center;
+} 
+#wrapper h1{
+    text-align:center;
+    color:red;
+    font-weight: bold;
+    font-size:100px;
+    padding-top: 80px;
+}
+#container{
+    height: 120px;
+}
+#container p{
+    text-align: center;
+    color:black;
+    font-weight: bold;
+    font-size:35px;
+}
+#wrapper button{
+    padding:10px;
+
+}
+
+</style>
+<script>
+var flag=true;
+var noteArr=["#","♫","♬","♪","♩","♭"];
+var n=0;
+var str="";
+
+function init(){
+    document.querySelector("button").addEventListener("click",function(){
+        //메인페이지로 링크
+        //a태그를 자바스크립트로 표현한 것이 location.href
+        location.href="./selectSong.html";
+    });
+}
+function blink(){
+    str+=noteArr[n++];
+    n=(n%noteArr.length);
+
+    if(str.length==10){
+        str=""
+    }
+
+    document.getElementById("note").innerText=str; 
+}
+window.addEventListener("load",function(){
+    init();
+    setInterval("blink()", 500);
+});
+</script>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Rythming..</h1>
+        <div id="container">
+            <p id="note"></p>
+        </div>
+        <button>Game Start</button>
+    </div>
+</body>
+</html>
