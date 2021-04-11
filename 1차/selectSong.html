@@ -95,16 +95,19 @@ var songflag=0;
 
 
 function init(){
+    
+    
     wrapper=document.getElementById("wrapper");
     title=document.getElementById("title");
    
-
+    
     createDiv();
     createImg();
     
-    for(var i = 0 ; i<imgArr.length; i++){
+    for(var i = 0 ; i<btnArr.length; i++){
         pushbt(i);
     }
+
 
 }
 
@@ -162,17 +165,20 @@ function createImg(){
 
 }
 function pushbt(i){
+    
     btnArr[i].addEventListener("click",function(){
+        
+        songNum=i;
         if(myMusic==null){
-            selectSong(i);
+            selectSong();
         }else{
             myMusic.pause();
-            selectSong(i);
+            selectSong();
         }
     });
 }
 
-function selectSong(songNum){
+function selectSong(){
 
     title.innerText=trackArr[songNum].title;
     myMusic=new Audio(trackArr[songNum].song);
@@ -188,12 +194,12 @@ function move(){
 
 
 function easyclick(){
-    localStorage.setItem("selectsongNum",songNum);
+    localStorage.setItem("selectsongNum", songNum);
     localStorage.setItem("version","easy");
     location.href="./main.html";
 }
 function hardclick(){
-    localStorage.setItem("selectsongNum",songNum);
+    localStorage.setItem("selectsongNum", songNum);
     localStorage.setItem("version","hard");
     location.href="./main.html";
     
@@ -201,7 +207,6 @@ function hardclick(){
 
 window.addEventListener("load",function(){
     init();
-    selectSong(songNum);
     setInterval("move()",10);
 });
 </script>
