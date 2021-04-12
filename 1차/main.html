@@ -18,6 +18,7 @@
     overflow: hidden;
     
 }
+
 </style>
 <script src="./js/lib.js"></script>
 
@@ -52,16 +53,20 @@ var combocnt = 0 ;
 
 var dots ; //남은 도트 개수
 
+var div ; // 게임 첫 화면에 뜨는 버튼만드는 전역변수
+
 
 function init() {
     wrapper = document.getElementById("wrapper");
-
+  
     play_audio(); //노래재생
     createscore(); //점수칸 생성
     createbar(); //바 생성
     createback(); //도트 내려오는 배경 생성
     createdot(); // 도트 생성
+    createstartbt(); //스타트 버튼 div 생성
     
+
     document.body.addEventListener("keydown", function () {  //키보드를 누를때 이벤트처리
         
         var key = event.keyCode; 
@@ -108,6 +113,40 @@ function init() {
     });
     
 }
+
+function createstartbt(){  //게임시작 타이머 스타트 버튼 div 생성
+    div = document.getElementById("startclick");
+    div.style.width = 200+"px";
+    div.style.height = 100+"px";
+    div.style.left = 400+"px";
+    div.style.top = 200+"px";
+    div.style.fontSize = 80+"px";
+    div.style.textAlign = "center";
+    div.style.position = "absolute";
+    div.style.backgroundColor="white";
+    div.style.float = "left";
+
+   wrapper.appendChild(div);
+}
+
+var time=3; //3초->1초
+function startclick(){
+    
+    var timestart = setInterval(function(){
+      div.innerText=time;  
+      time -= 1;
+      if(time<0){
+
+          audio.play();
+          gameflag = true;
+          div.style.display = "none"; //완료되면 없애고 루프도 중지
+          clearInterval(timestart);
+      }
+    }, 1000);
+
+}
+
+
 
 //노래 선택 함수
 function play_audio() {  
@@ -402,11 +441,16 @@ window.addEventListener("load", function () {
 </head>
 
 <body>
+   
 
-    <input type="button" onClick="audio.play(); gameflag=true;" value="PLAY" />
+ <input type="button" onClick="audio.play(); gameflag=true;" value="PLAY" />
     <input type="button" onClick="audio.pause(); gameflag=false;" value="PAUSE" />
 
-    <div id="wrapper"></div>
+  
+    <div id="wrapper">   
+    
+        <div id="startclick" onclick="startclick()" >누르면 시작!!</div>    
+    </div>
 
 
 
