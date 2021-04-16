@@ -1,0 +1,29 @@
+create database stocksite;
+
+create table
+
+create table stock(
+ stock_id int primary key auto_increment,
+ stock_name varchar(30)
+)default  character set utf8;
+
+
+create table stock_chart(
+ stock_chart_id int primary key auto_increment,
+ sotck_id int,
+ stock_count int,
+ constraint fk_stockstchart foreign key(stock_id) references stock(stock_id)
+)default  character set utf8;
+
+
+
+create table member(
+ member_id int primary key auto_increment,
+ user_id varchar(30),
+ user_pass varchar(30),
+ user_name varchar(30),
+ user_money int default '0',
+ regdate  timestamp default now()
+)default  character set utf8;
+
+

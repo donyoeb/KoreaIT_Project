@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/navbar-top.css">
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: lightgray;
+      }
+      form {
+        margin: auto;
+        width: 70%;
+        border:1px solid #ccc;
+        background-color: white;
+      }
+      
+      input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+      
+      button:hover {
+        opacity: 0.8;
+      }
+      
+      .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+      }
+      
+      .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+      }
+      
+      img.avatar {
+        width: 40%;
+        border-radius: 50%;
+      }
+      
+      .container {
+        padding: 16px;
+      }
+      
+      span.psw {
+        float: right;
+        padding-top: 16px;
+      }
+      
+      /* Change styles for span and cancel button on extra small screens */
+      @media screen and (max-width: 300px) {
+        span.psw {
+           display: block;
+           float: none;
+        }
+        .cancelbtn {
+           width: 100%;
+        }
+      }
+      </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  function loginCheck(){
+      $("form").attr({
+          action:"/coin/main/login",
+          method:"post"
+      });
+      $("form").submit(); //전송메서드
+  }
+</script>
+</head>
+<body>
+      <!-- 탑 네비게이션 -->
+      <%- include('inc/top_navi')%>
+
+<h2>Login</h2>
+
+<form method="post">
+
+  <div class="container">
+   
+    <label for="user_id"><b>ID</b></label>
+    <input type="text" placeholder="Enter ID" name="user_id" required>
+
+    <label for="user_pass"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="user_pass" required>
+
+    <button onClick="loginCheck()">Login</button>
+    
+  </div>
+
+  
+</form>
+
+</body>
+</html>
