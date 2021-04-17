@@ -1,7 +1,13 @@
 <div class="navbar">
   <img src="/img/logo.png" id="logo">
+  
+  <%if(joinUser==undefined){%> 
   <a href="/coin/main">거래소 메인</a>
-  <a href="#">투자내역</a>
+  <%} else{%>
+    <a href="/coin/usermain">거래소 메인</a>
+  <%}%>
+
+  <a href="/coin/main/investment">투자내역</a>
   <a href="#">마이페이지</a>
   <a href="#">게시판</a>
   <div class="dropdown">
@@ -13,7 +19,19 @@
       <a href="#">테트리스</a>
     </div>
   </div> 
-  <a href="/coin/main/loginform" >Login</a>
-  <a href="/coin/main/signupform" >Sign Up</a>
+
+  
+  <%var joinUser;%>
+  <%if(joinUser==undefined){ %>
+
+    <a href="/coin/main/signupform" style="float:right">Sign Up</a>
+    <a href="/coin/main/loginform" style="float:right">Login</a>
+     
+<%} else { %>
+  
+    <a href="/coin/main/logout" style="float:right">Logout</a>
+    <a href="#" style="float:right"><%=joinUser.user_name%></a>
+<%}%>
+
 </div>
 
