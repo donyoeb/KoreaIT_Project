@@ -8,6 +8,7 @@
       body {
         font-family: Arial, Helvetica, sans-serif;
         background-color: lightgray;
+        margin: 0px;
       }
       
       form {
@@ -97,12 +98,30 @@
       });
       $("form").submit(); //전송메서드
   }
+  if(user_name.value==""){//user.name
+      alert("이름을 입력하세요.");
+      user_name.focus();
+  }else  if(user_id.value==""){//user.id
+      alert("아이디를 입력하세요.");
+      user_id.focus();
+  }else if(user_pass.value==""){//user.pass
+      alert("비밀번호를 입력하세요");
+      user_pass.focus();
+  }else if(user_pass.value!=psw-repeat.value){//두 비밀번호가 다르다면
+      alert("비밀번호를 확인하세요");
+      psw-repeat.focus();
+  }
+  // }else{
+  //     var form=document.getElementById("form");
+  //     //입력 양식인 form태그는 전송 대상 서버에 어떤 방식으로 전송할지 등을 지정
+  //     form.submit();//네트워크를 통해 입력데이터 들이 전송
+  // }       
 </script>
 </head>
 <body>
       <!-- 탑 네비게이션 -->
       <%- include('inc/top_navi')%>
-      
+<div style="height: 800px;">
 <form>
   <div class="container">
     <img src="/img/logo.png" id="logo" style="float:right">
@@ -128,6 +147,14 @@
 
   </div>
 </form>
+
+</div>
+
+
+<!--  footer  -->
+<div>
+  <%- include('inc/footer')%>
+</div>
 
 </body>
 </html>

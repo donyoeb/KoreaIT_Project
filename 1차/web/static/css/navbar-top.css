@@ -2,9 +2,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#topnavi_wrapper{
+  background-color: #333;
+}
 .navbar {
   overflow: hidden;
   background-color: #333;
+  width: 80%;
+  margin: auto;
 }
 
 #logo{

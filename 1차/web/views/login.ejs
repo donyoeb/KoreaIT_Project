@@ -8,6 +8,7 @@
       body {
         font-family: Arial, Helvetica, sans-serif;
         background-color: lightgray;
+        margin: 0px;
       }
       form {
         margin-top: 300px;
@@ -108,29 +109,32 @@
 <body>
       <!-- 탑 네비게이션 -->
       <%- include('inc/top_navi')%>
-
-      
-<form>
+<div style="height: 800px;">
+  <form>
+    <div class="container">
+      <img src="/img/logo.png" id="logo" style="float:right">
+      <h2>Login</h2>
+      <label for="user_id"><b>ID</b></label>
+      <input type="text" placeholder="Enter ID" name="user_id" required>
   
-  <div class="container">
-    <img src="/img/logo.png" id="logo" style="float:right">
-    <h2>Login</h2>
-    <label for="user_id"><b>ID</b></label>
-    <input type="text" placeholder="Enter ID" name="user_id" required>
-
-    <label for="user_pass"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="user_pass" required>
-
-    <button class="loginbtn" onclick="loginCheck()">Login</button>
-  </div>
-
-  <div class="container2" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-
+      <label for="user_pass"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="user_pass" required>
   
-</form>
+      <button class="loginbtn" onclick="loginCheck()">Login</button>
+    </div>
+  
+    <div class="container2" style="background-color:#f1f1f1">
+      <button type="button" class="cancelbtn" onclick="location.href='/coin/main'">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+
+</div>
+  
+<!--  footer  -->
+<div>
+  <%- include('inc/footer')%>
+</div>
 
 </body>
 </html>
