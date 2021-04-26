@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stock market</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/navbar-top.css">
+     
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+
+google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['2021-04-01', 20, 28, 38, 45],
+      ['2021-04-02', 31, 38, 55, 66],
+      ['2021-04-03', 50, 55, 77, 80],
+      ['2021-04-04', 77, 77, 66, 50],
+      ['2021-04-05', 16, 26, 28, 30],
+      ['2021-04-06', 70, 36, 22, 15],
+      ['2021-04-07', 15, 30, 45, 15],
+      ['2021-04-08', 68, 60, 22, 30],
+      ['2021-04-09', 2, 10, 22, 15],
+      ['2021-04-10', 68, 30, 22, 15],
+     
+      // Treat first row as data as well.
+    ], true);
+
+    var options = {
+      legend:'none'
+    };
+
+    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+    chart.draw(data, options);
+  }
+
+
+  function rhythmgame(){
+    location.href="../rhythm_game/intro.html";
+
+  }
+
+
+</script>
+</head>
+<body>
+      <!-- 탑 네비게이션 -->
+    <%- include('inc/top_navi')%>
+
+
+  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+
+  </body>
+</html>
