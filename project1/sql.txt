@@ -1,0 +1,69 @@
+create database stocksite;
+
+
+create table stock(
+ stock_id int primary key auto_increment,
+ stock_name varchar(30),
+ stock_count int
+)default  character set utf8;
+
+insert into stock(stock_name, stock_count)
+values("Hcoin", 100);
+
+create table stock_chart(
+ stock_chart_id int primary key auto_increment,
+ stock_id int,
+ open_price int,
+ high_price int,
+ low_price int,
+ close_price int,
+ stock_date timestamp default now(),
+ constraint fk_stockstchart foreign key(stock_id) references stock(stock_id)
+)default  character set utf8;
+
+
+create table member(
+ member_id int primary key auto_increment,
+ user_id varchar(30),
+ user_pass varchar(30),
+ user_name varchar(30),
+ user_money int default '0',
+ regdate  timestamp default now()
+)default  character set utf8;
+
+
+//코인 기본 데이터 넣기
+insert into stock_chart(stock_id,open_price,high_price,low_price,close_price,stock_date)
+values(1, 20, 30, 10, 15, "2021-04-23 12:00:00");
+
+insert into stock_chart(stock_id,open_price,high_price,low_price,close_price,stock_date)
+values(1, 15, 20, 15, 18, "2021-04-23 12:01:00");
+
+insert into stock_chart(stock_id,open_price,high_price,low_price,close_price,stock_date)
+values(2, 20, 25, 10, 12, "2021-04-23 12:00:00");
+
+insert into stock_chart(stock_id,open_price,high_price,low_price,close_price,stock_date)
+values(2, 12, 15, 6, 8, "2021-04-23 12:01:00");
+
+
+
+
+select * from stock_chart where stock_id=1;
+
+select JSON_EXTRACT(profile, '$.open') from stock_chart;
+
+select JSON_EXTRACT(json명, '$.json안의 컬럼명') from 테이블명;
++---------------------------------+
+| JSON_EXTRACT(profile, '$.open') |
++---------------------------------+
+| 20                              |
++---------------------------------+
+
+
+
+
+insert into stock_chart(stock_id,open_price,high_price,low_price,close_price,stock_date)
+values(1, 20, 30, 10, 15, "2021-04-23 12:00:00");
+
+insert into stock_chart(stock_id,open_price,high_price,low_price,close_price,stock_date)
+values(1, 15, 20, 15, 18, "2021-04-23 12:01:00");
