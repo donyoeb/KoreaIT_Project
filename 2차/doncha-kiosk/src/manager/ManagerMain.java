@@ -1,10 +1,11 @@
 package manager;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,21 +16,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
-import customer.CustomerMain;
-import manager.CustomButton;
-import manager.Page;
 
 import member.JoinForm;
 import member.LoginForm;
 import member.MemberMain;
 import order.OrderMain;
 import product.ProductMain;
-
-import java.awt.event.ActionListener;
-
-
+import user.UserMain;
 
 public class ManagerMain extends JFrame implements ActionListener{
 	
@@ -61,7 +54,7 @@ public class ManagerMain extends JFrame implements ActionListener{
 			bt_menu[i] = new CustomButton(menu_title[i]);
 			bt_menu[i].setId(i); //반복문의 i 를 각 버튼의 식별  id 로 할당!!!
 		}
-		
+		 
 
 		//페이지들 생성 
 		pages[0] = new ProductMain(this); //상품관리
@@ -70,9 +63,10 @@ public class ManagerMain extends JFrame implements ActionListener{
 		pages[3] = new LoginForm(this);//로그인
 		pages[4] = new JoinForm(this);//회원가입폼
 		
+		p_north.setBackground(new Color(207, 220, 186));
 		
 		//조립
-		for(JButton bt : bt_menu) { // improved for loop : 주로 집합데이터 형식을 대상으로 한 loop
+		for(JButton bt : bt_menu) { 
 			p_north.add(bt);
 		}
 		add(p_north, BorderLayout.NORTH);
@@ -84,14 +78,13 @@ public class ManagerMain extends JFrame implements ActionListener{
 		add(p_center);
 		
 		
-		
 		for(int i=0;i<bt_menu.length;i++) {
 			bt_menu[i].addActionListener(this);
 		}
 		
 		//보여주기
 		//인증여부에 따라 알맞는 페이지 보여주기 
-		if(session==false) { //인증을 받지 않은 상태이므로, 로그인을 디폴트로 보여주자!!
+		if(session==false) { //인증을 받지 않은 상태이므로, 로그인을 디폴트로 보여주기
 			showHide(3);//제일 먼저 보여주고 싶은 페이지
 		}else {
 			showHide(0);
@@ -104,7 +97,7 @@ public class ManagerMain extends JFrame implements ActionListener{
 		addWindowListener(new WindowAdapter() { //종료 이벤트 해당창만 종료
 				@Override
 				public void windowClosing(WindowEvent e) {
-					// TODO Auto-generated method stub
+					
 					dispose();
 				}
 		});
@@ -112,12 +105,9 @@ public class ManagerMain extends JFrame implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		//어떤 버튼이 눌렸는지? - 이벤트가 연결된 컴포넌트를 가리켜 이벤트 소스 
+		//어떤 버튼이 눌렸는지 
 		Object obj = e.getSource();
-		//obj는 오브젝트 자료형이기 때문에, 버튼을 가리킬수는 있지만, 버튼 보다는 보편적인 기능만을 가지고 
-		//있기에, 즉 가진게 별로 없기에 버튼의 특징을 이용하기 위해서는 버튼 형으로 변환해서 사용하자!!
-		CustomButton bt=(CustomButton)obj; //down casting
-		//System.out.println(bt.getText());
+		CustomButton bt=(CustomButton)obj; 
 		if(session) {
 			showHide(bt.getId());
 		}else {
@@ -184,11 +174,10 @@ public class ManagerMain extends JFrame implements ActionListener{
 		return con;
 	}
 	
-	public void showHide(int n) { //보여주고 싶은 페이지의 번호를 넘기면 된다..
-		//내가 누른 버튼에 해당하는 페이지만 setVisible() 을 true로 놓고 나머지는 false로 놓자!!
+	public void showHide(int n) { //보여주고 싶은 페이지의 번호를 넘기기
 		for(int i=0;i<pages.length;i++) {
 			if(n==i) {
-				pages[i].setVisible(true); //현재 선택한 버튼과 같은 인덱스를 갖는 페이지라면..
+				pages[i].setVisible(true); //현재 선택한 버튼과 같은 인덱스를 갖는 페이지면 보이기
 			}else {
 				pages[i].setVisible(false);
 			}
