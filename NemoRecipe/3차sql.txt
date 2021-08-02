@@ -1,0 +1,214 @@
+////////////////데이터베이스 생성
+
+create database NemoRecipe;
+
+use nemorecipe;
+
+
+
+//////////////////////테이블 생성
+
+
+-멤버테이블 
+create table member(
+	member_id int primary key auto_increment,
+	user_id varchar(20),
+	user_pass varchar(20),
+	user_nickname varchar(20),
+	signup timestamp default now()
+)default character set utf8;
+
+
+-레시피 카테고리 테이블
+create table category_type(
+	type_id int primary key auto_increment,
+	type_type varchar(20)
+)default character set utf8;
+
+create table category_situation(
+	situation_id int primary key auto_increment,
+	situation_type varchar(20)
+)default character set utf8;
+
+create table category_ingredient(
+	ingredient_id int primary key auto_increment,
+	ingredient_type varchar(20)
+)default character set utf8;
+
+create table category_method(
+	method_id int primary key auto_increment,
+	method_type varchar(20)
+)default character set utf8;
+
+
+-레시피 정보 테이블
+create table info_time(
+	time_id int primary key auto_increment,
+	time_info varchar(20)
+)default character set utf8;
+
+create table info_level(
+	level_id int primary key auto_increment,
+	level_info varchar(20)
+)default character set utf8;
+
+
+
+-레시피 테이블
+create table recipe(
+	recipe_id int primary key auto_increment,
+	member_id int,
+	constraint fk_member_id foreign key (member_id) 
+	 references members(member_id),
+	type_id int,
+	constraint fk_type_id foreign key (type_id) 
+	 references category_type(type_id),
+	situation_id int,
+	constraint fk_situation_id foreign key (situation_id) 
+	 references category_situation(situation_id),
+	ingredient_id int,
+	constraint fk_ingredient_id foreign key (ingredient_id) 
+	 references category_ingredient(ingredient_id),
+	method_id int,
+	constraint fk_method_id foreign key (method_id) 
+	 references category_method(method_id),
+	time_id int,
+	constraint fk_time_id foreign key (time_id) 
+	 references info_time(time_id),
+	level_id int,
+	constraint fk_level_id foreign key (level_id) 
+	 references info_level(level_id),
+	serving int default 0,
+	recipe_name varchar(20),
+	recipe_order varchar(100),
+	recipe_ingredient varchar(100),
+	recipe_img varchar(30),
+	recipe_date timestamp default now()
+)default character set utf8;
+
+
+
+	
+-랭크 테이블
+create table rank(
+	rank_id int primary key auto_increment,
+	recipe_id int,
+	constraint fk_recipe_id foreign key (recipe_id) 
+	 references recipe(recipe_id),
+	good_cnt int default 0,
+	view_cnt int default 0
+)default character set utf8;
+
+-후기 테이블
+create table reboard(
+reboard_id int primary key auto_increment,
+writer_id int,
+title varchar(50),
+team int,
+step int,
+depth int,
+foreign key (writer_id) references members(member_id)
+)default character set utf8;
+
+
+//데이터 입력
+
+insert into category_type(type_type) values ('밑반찬');
+insert into category_type(type_type) values ('메인반찬');
+insert into category_type(type_type) values ('국/탕');
+insert into category_type(type_type) values ('찌개');
+insert into category_type(type_type) values ('디저트');
+insert into category_type(type_type) values ('면');
+insert into category_type(type_type) values ('만두');
+insert into category_type(type_type) values ('밥/죽/떡');
+insert into category_type(type_type) values ('퓨전요리');
+insert into category_type(type_type) values ('김치/젓갈/장류');
+insert into category_type(type_type) values ('양념/소스/잼류');
+insert into category_type(type_type) values ('한식');
+insert into category_type(type_type) values ('양식');
+insert into category_type(type_type) values ('일식');
+insert into category_type(type_type) values ('중식');
+insert into category_type(type_type) values ('해외');
+insert into category_type(type_type) values ('베이커리');
+insert into category_type(type_type) values ('차/음료/술');
+insert into category_type(type_type) values ('기타');
+
+insert into category_situation(situation_type) values ('일상');
+insert into category_situation(situation_type) values ('간편/초스피드');
+insert into category_situation(situation_type) values ('손님접대');
+insert into category_situation(situation_type) values ('술안주');
+insert into category_situation(situation_type) values ('다이어트');
+insert into category_situation(situation_type) values ('이유식');
+insert into category_situation(situation_type) values ('명절');
+insert into category_situation(situation_type) values ('야식');
+insert into category_situation(situation_type) values ('간식');
+insert into category_situation(situation_type) values ('영약식');
+insert into category_situation(situation_type) values ('도시락');
+insert into category_situation(situation_type) values ('기타');
+
+insert into category_ingredient(ingredient_type) values ('소고기');
+insert into category_ingredient(ingredient_type) values ('돼지고기');
+insert into category_ingredient(ingredient_type) values ('닭고기');
+insert into category_ingredient(ingredient_type) values ('기타육류');
+insert into category_ingredient(ingredient_type) values ('채소류');
+insert into category_ingredient(ingredient_type) values ('해물류');
+insert into category_ingredient(ingredient_type) values ('달걀/유제품');
+insert into category_ingredient(ingredient_type) values ('가공식품');
+insert into category_ingredient(ingredient_type) values ('밀가루');
+insert into category_ingredient(ingredient_type) values ('건어물류');
+insert into category_ingredient(ingredient_type) values ('버섯류');
+insert into category_ingredient(ingredient_type) values ('과일류');
+insert into category_ingredient(ingredient_type) values ('콩/견과류');
+insert into category_ingredient(ingredient_type) values ('곡류');
+insert into category_ingredient(ingredient_type) values ('기타');
+
+insert into category_method(method_type) values ('볶음');		
+insert into category_method(method_type) values ('끓이기');
+insert into category_method(method_type) values ('부침');
+insert into category_method(method_type) values ('조림');
+insert into category_method(method_type) values ('무침');
+insert into category_method(method_type) values ('비빔');
+insert into category_method(method_type) values ('찜');
+insert into category_method(method_type) values ('절임');
+insert into category_method(method_type) values ('튀김');
+insert into category_method(method_type) values ('삶기');
+insert into category_method(method_type) values ('굽기');
+insert into category_method(method_type) values ('데치기');
+insert into category_method(method_type) values ('회');
+insert into category_method(method_type) values ('기타');
+
+insert into Info_time(time_info) values ('1분 ~ 3분');
+insert into Info_time(time_info) values ('5분 미만');
+insert into Info_time(time_info) values ('10분 미만');
+insert into Info_time(time_info) values ('10분 ~ 30분');
+insert into Info_time(time_info) values ('30분 ~ 1시간');
+insert into Info_time(time_info) values ('1시간 이상');
+
+insert into Info_level(level_info) values ('상');
+insert into Info_level(level_info) values ('중');
+insert into Info_level(level_info) values ('하');
+insert into Info_level(level_info) values ('누구든지');
+
+create table member(
+	member_id int primary key auto_increment,
+	user_id varchar(20),
+	user_pass varchar(20),
+	user_nickname varchar(20),
+	signup timestamp default now()
+)default character set utf8;
+
+
+insert into member(user_id, user_pass, user_nickname) values ("zz123","1234","닉네임");
+
+insert into recipe(member_id, type_id,  situation_id, ingredient_id, method_id, time_id,  level_id, serving, recipe_img, recipe_name, recipe_order, recipe_ingredient) values (1,1,1,1,1,1,1,1,"이미지","네임","순서","재료");
+
+
+
+
+
+
+
+
+
+
+

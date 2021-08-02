@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee https://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		
+	<!-- dataSource 등록 -->
+	<jee:jndi-lookup
+		id="dataSource"
+		jndi-name="jndi/mysql"
+		resource-ref="true"/>
+		
+	<!-- 트랜잭션 매니저 등록 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		id="dataSourceTransactionManager"
+		p:dataSource-ref="dataSource"/>
+		
+	<!-- SqlSessionFactoryBean 등록 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+		id="sqlSessionFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:configLocation="classpath:com/koreait/nemorecipe/mybatis/config.xml"/>
+		
+	<!-- SqlSessionTemplate 등록 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>		
+	
+	<!-- 위에서 등록한 빈들을 제외한 나머지 Service, DAO 등은 자동검색하여 등록을 실시 
+		@Service, @Repository 등등 자동으로 메모리에 인스턴스 생성
+		그리고 해당 빈에 @Autowired가 등록되어 있다면, weaving 마저도 자동 주입
+	-->
+	<context:component-scan base-package="com.koreait.nemorecipe.model"/>
+	
+	<!-- 어댑터 등록 -->
+	<!-- <bean id="" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list value-type="java.util.ArrayList">
+				<ref bean="mappingJackson2HttpMessageConverter"/>
+			</list>
+		</property>	
+	</bean> -->
+	
+	<!-- jackson binder등록 컨버터 -->
+	<!-- <bean id="mappingJackson2HttpMessageConverter" 
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<value>application/json;charset=utf-8</value>
+		</property>
+	</bean> -->
+	
+</beans>

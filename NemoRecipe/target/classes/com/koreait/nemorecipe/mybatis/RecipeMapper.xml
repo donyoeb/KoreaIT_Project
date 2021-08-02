@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="recipe">
+
+
+	<insert id="insert" parameterType="recipe">
+		insert into recipe(member_id, type_id,  situation_id, ingredient_id, method_id, time_id,  level_id, serving, recipe_img, recipe_name, recipe_order, recipe_ingredient) 
+		values(#{member_id},#{type_id},#{situation_id},#{ingredient_id},
+		   #{method_id},#{time_id},#{level_id},#{serving},#{recipe_img},
+		   #{recipe_name},#{recipe_order},#{recipe_ingredient});
+	</insert>
+</mapper>

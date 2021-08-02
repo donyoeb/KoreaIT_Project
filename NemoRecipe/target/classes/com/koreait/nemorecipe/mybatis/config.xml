@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- VO 넣기 -->
+		<typeAlias type="com.koreait.nemorecipe.domain.Member" alias="Member"/>
+		<typeAlias type="com.koreait.nemorecipe.domain.Recipe" alias="Recipe"/>
+	</typeAliases>
+	
+	<mappers>
+		<!-- Mapper 넣기 -->
+		<mapper resource="com/koreait/nemorecipe/mybatis/MemberMapper.xml"/>
+		<mapper resource="com/koreait/nemorecipe/mybatis/RecipeMapper.xml"/>
+	</mappers>
+</configuration>
