@@ -1,3 +1,7 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="javax.naming.spi.DirStateFactory.Result"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="com.mysql.jdbc.Connection"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!--
 =========================================================
@@ -37,6 +41,8 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 
 <script>
 	$(function(){
@@ -105,22 +111,37 @@ The above copyright notice and this permission notice shall be included in all c
 				<div class="regist_recipe">
 					<label style="text-align: left;">카테고리</label>
 					<div style="text-align: right;">
-						<select style="width: 100px;">
-							<option value="0" name="type_id">종류별</option>
-							<option value="1"></option>
-							<option value="2"></option>
-						</select> <select style="width: 100px;">
-							<option value="0" name="situation_id">상황별</option>
-							<option value="1"></option>
-							<option value="2"></option>
-						</select> <select style="width: 100px;">
-							<option value="0" name="method_id">방법별</option>
-							<option value="1"></option>
-							<option value="2"></option>
-						</select> <select style="width: 100px;">
-							<option value="0" name="ingredient_id">재료별</option>
-							<option value="1"></option>
-							<option value="2"></option>
+						<select style="width: 100px;" name="type">
+							<option value="종류별" >종류별</option>
+							<option value="메인반찬">메인반찬</option>
+							<option value="밑반찬">밑반찬</option>
+							<option value="국/탕/찌개">국/탕/찌개</option>
+							<option value="면/밀가루">면/밀가루</option>
+							<option value="밥/죽/떡">밥/죽/떡</option>
+							<option value="기타">기타</option>
+						</select> <select style="width: 100px;" name="situation">
+							<option value="상황별">상황별</option>
+							<option value="야식">야식</option>
+							<option value="간편">간편</option>
+							<option value="손님접대">손님접대</option>
+							<option value="술안주">술안주</option>
+							<option value="다이어트">다이어트</option>
+							<option value="기타">기타</option>
+						</select> <select style="width: 100px;" name="method">
+							<option value="방법별" >방법별</option>
+							<option value="볶음">볶음</option>
+							<option value="부침">부침</option>
+							<option value="조림">조림</option>
+							<option value="찜">찜</option>
+							<option value="튀김">튀김</option>
+							<option value="기타">기타</option>
+						</select> <select style="width: 100px;" name="ingredient">
+							<option value="재료별" >재료별</option>
+							<option value="고기류">고기류</option>
+							<option value="채소류">채소류</option>
+							<option value="해물류">해물류</option>
+							<option value="가공류">가공류</option>
+							<option value="기타">기타</option>
 						</select>
 					</div>
 				</div>
@@ -135,18 +156,24 @@ The above copyright notice and this permission notice shall be included in all c
 						</div>
 						<div style="text-align: right;">
 							<select style="width: 100px" name="serving">
-								<option value="0">1인분</option>
-								<option value="1"></option>
-								<option value="2"></option>
+								<option value="1인분">1인분</option>
+								<option value="2~3인분">2~3인분</option>
+								<option value="4~5인분">4~5인분</option>
+								<option value="6~10인분">6~10인분</option>
+								<option value="10인분 이상">10인분 이상</option>
 							</select>
-							<select style="width: 100px" name="time_id">
-								<option value="0">1시간</option>
-								<option value="1"></option>
-								<option value="2"></option>
-							</select> <select style="width: 100px;" name="level_id">
-								<option value="0">A</option>
-								<option value="1"></option>
-								<option value="2"></option>
+							<select style="width: 100px" name="time">
+								<option value="3분 미만">3분 미만</option>
+								<option value="3분~5분">3분~5분</option>
+								<option value="5분~10분">5분~10분</option>
+								<option value="10분~30분">10분~30분</option>
+								<option value="30분~1시간">30분~1시간</option>
+								<option value="1시간이상">1시간이상</option>
+							</select> <select style="width: 100px;" name="level">
+								<option value="상">상</option>
+								<option value="중">중</option>
+								<option value="하">하</option>
+								<option value="누구든지">누구든지</option>
 							</select>
 						</div>
 					</div>

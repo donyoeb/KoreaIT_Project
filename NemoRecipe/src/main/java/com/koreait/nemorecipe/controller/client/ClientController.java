@@ -28,6 +28,7 @@ public class ClientController {
 	@Autowired
 	private RecipeService recipeService;
 	
+	
 	// 메인화면 요청처리
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainForm() {
@@ -51,14 +52,7 @@ public class ClientController {
 	public String registRecipe(Recipe recipe) {
 
 		recipe.setMember_id(1);
-		recipe.setType_id(1);
-		recipe.setSituation_id(1);
-		recipe.setIngredient_id(1);
-		recipe.setMethod_id(1);
-		recipe.setTime_id(1);
-		recipe.setLevel_id(1);
-
-		logger.info("레시피 이름은 {} ", recipe);
+		
 		recipeService.regist(recipe);
 
 		return "client/list";

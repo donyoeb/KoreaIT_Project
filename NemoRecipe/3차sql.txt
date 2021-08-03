@@ -52,14 +52,12 @@ create table info_level(
 	level_info varchar(20)
 )default character set utf8;
 
-
-
 -레시피 테이블
 create table recipe(
 	recipe_id int primary key auto_increment,
 	member_id int,
 	constraint fk_member_id foreign key (member_id) 
-	 references members(member_id),
+	 references member(member_id),
 	type_id int,
 	constraint fk_type_id foreign key (type_id) 
 	 references category_type(type_id),
@@ -87,6 +85,25 @@ create table recipe(
 )default character set utf8;
 
 
+-레시피 테이블 ( 포린키 제외버젼)
+create table recipe(
+	recipe_id int primary key auto_increment,
+	member_id int,
+	constraint fk_member_id foreign key (member_id) 
+	 references member(member_id),
+	type varchar(30),
+	situation varchar(30),
+	ingredient varchar(30),
+	method varchar(30),
+	time varchar(30),
+	level varchar(30),
+	serving varchar(30),
+	recipe_name varchar(20),
+	recipe_order varchar(100),
+	recipe_ingredient varchar(100),
+	recipe_img varchar(30),
+	recipe_date timestamp default now()
+)default character set utf8;
 
 	
 -랭크 테이블
@@ -107,7 +124,7 @@ title varchar(50),
 team int,
 step int,
 depth int,
-foreign key (writer_id) references members(member_id)
+foreign key (writer_id) references member(member_id)
 )default character set utf8;
 
 
