@@ -13,6 +13,7 @@
 
  */
 /*     brand Colors              */
+
 .carousel.carousel-full-navigation .left {
   cursor: url("../../img/arrow-left.png"), url("../../img/arrow-left.cur"), default !important;
 }
@@ -67,7 +68,20 @@
 	z-index: 2;
 }
 
-.regist_button{
+.button_area{
+	position: relative;
+	float: right;
+	width: 200px;
+	height: 100px;
+	font-family: 'Gowun Dodum', sans-serif;
+}
+.list_button{
+   position: absolute;
+	right: 10%;
+	width: 150px;
+	height: 50px;
+}
+.regist_button {
 	position: absolute;
 	left: 50%;
 	width: 150px;
