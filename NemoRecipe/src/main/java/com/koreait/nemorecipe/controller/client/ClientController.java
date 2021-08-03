@@ -61,7 +61,7 @@ public class ClientController {
 		logger.info("레시피 이름은 {} ", recipe);
 		recipeService.regist(recipe);
 
-		return "client/regist";
+		return "client/list";
 	}
 
 	// 랭킹 화면 요청처리
