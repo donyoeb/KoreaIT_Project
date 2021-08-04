@@ -10,36 +10,8 @@
 		   #{recipe_name},#{recipe_order},#{recipe_ingredient});
 	</insert>
 	
-	<select id="selectAll" resultMap="RecipeMemberCollection">
+	<select id="selectAll" resultType="Recipe">
 		select * from recipe order by recipe_id desc
 	</select>
-	
-	<select id="selectAllLike" resultMap="RecipeMemberCollection">
-		select * from recipe order by recipe_like desc
-	</select>
-	
-	<select id="selectAllHit" resultMap="RecipeMemberCollection">
-		select * from recipe order by recipe_hit desc
-	</select>
-	
-	<!-- Member를 컬렉션으로 가져오기 -->
-	<resultMap type="Recipe" id="RecipeMemberCollection">
-		<id column="recipe_id" property="recipe_id"/>
-		<result column="type" property="type"/>
-		<result column="situation" property="situation"/>
-		<result column="ingredient" property="ingredient"/>
-		<result column="method" property="method"/>
-		<result column="serving" property="serving"/>
-		<result column="recipe_img" property="recipe_img"/>
-		<result column="recipe_name" property="recipe_name"/>
-		<result column="recipe_order" property="recipe_order"/>
-		<result column="recipe_ingredient" property="recipe_ingredient"/>
-		<result column="recipe_date" property="recipe_date"/>
-		<result column="recipe_hit" property="recipe_hit"/>
-		<result column="recipe_like" property="recipe_like"/>
-		<association column="member_id" property="member"
-			javaType="Member" select="Member.select"/>
-	</resultMap>
-	
 	
 </mapper>

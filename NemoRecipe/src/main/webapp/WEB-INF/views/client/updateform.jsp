@@ -21,7 +21,7 @@ The above copyright notice and this permission notice shall be included in all c
   <link rel="icon" type="image/png" href="/resources/client/assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    NemoRecipe Sign in
+    NemoRecipe Modification
   </title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -35,15 +35,15 @@ The above copyright notice and this permission notice shall be included in all c
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(function(){
-	$("button[name='sign']").click(function(){
-		signUp();
+	$("button[name='update']").click(function(){
+		updateUp();
 	});
 });
 
-function signUp(){
+function updateUp(){
 	//서버에 회원가입 요청
 	$("form").attr({
-		"action":"/client/signup",
+		"action":"/client/update",
 		"method":"post"
 	});
 	$("form").submit();
@@ -54,69 +54,9 @@ function signUp(){
 
 <!-- 상단 네비게이션 바 -->
 <body class="login-page sidebar-collapse">
-	<nav
-		class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg"
-		color-on-scroll="100" id="sectionsNav">
-		<div class="container">
-			<div class="navbar-translate">
-
-				<!-- 좌상단 제목 -->
-				<a class="navbar-brand" href="/client/main">Nemo Recipe </a>
-
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="navbar-toggler-icon"></span> <span
-						class="navbar-toggler-icon"></span> <span
-						class="navbar-toggler-icon"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse">
-				<ul class="navbar-nav ml-auto">
-					<!-- Home -->
-					<li class="nav-item"><a class="nav-link"
-						href="/client/main" onclick=""> Home </a></li>
-					<!-- Recipe -->
-					<li class="nav-item"><a class="nav-link"
-						href="javascript:void(0)" onclick=""> Recipe </a></li>
-					<!-- Ranking -->
-					<li class="nav-item"><a class="nav-link"
-						href="/client/ranking" onclick=""> Ranking </a></li>
-					<!-- MyPage -->
-					<li class="nav-item"><a class="nav-link"
-						href="javascript:void(0)" onclick=""> MyPage </a></li>
-					<!-- 구분선 -->
-					<li><a> || </a></li>
-					<!-- 로그인 연결 -->
-					<li class="nav-item"><a class="nav-link"
-						href="/client/loginform"> Login </a></li>
-					<!-- 구분선 -->
-					<li><a> || </a></li>
-					<!-- 트위터 연결 -->
-					<li class="nav-item"><a class="nav-link" rel="tooltip"
-						title="" data-placement="bottom"
-						href="https://twitter.com/CreativeTim" target="_blank"
-						data-original-title="Follow us on Twitter" rel="nofollow"> <i
-							class="fa fa-twitter"></i>
-					</a></li>
-					<!-- 페이스북 연결 -->
-					<li class="nav-item"><a class="nav-link" rel="tooltip"
-						title="" data-placement="bottom"
-						href="https://www.facebook.com/CreativeTim" target="_blank"
-						data-original-title="Like us on Facebook" rel="nofollow"> <i
-							class="fa fa-facebook-square"></i>
-					</a></li>
-					<!-- 인스타그램 연결 -->
-					<li class="nav-item"><a class="nav-link" rel="tooltip"
-						title="" data-placement="bottom"
-						href="https://www.instagram.com/CreativeTimOfficial"
-						target="_blank" data-original-title="Follow us on Instagram"
-						rel="nofollow"> <i class="fa fa-instagram"></i>
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<!-- navi -->
+	<%@ include file="inc/top_navi.jsp" %>
+  <!-- navi -->
   
   <!-- 회원가입 폼 배경화면(300KB 넘어가면 이미지가 나오지 않음) -->
   <div class="page-header header-filter" style="background-image: url('/resources/client/assets/img/city.jpg'); background-size: cover; background-position: top center;">
@@ -128,11 +68,11 @@ function signUp(){
             <!-- 회원가입 카드 영역 -->
             <form class="form">
               <div class="card-header card-header-primary text-center">
-                <h4 class="card-title">Sign in</h4>
+                <h4 class="card-title">Modification</h4>
                 
               <!-- 회원가입 데이터 영역 -->
               </div>
-              <p class="description text-center">Nemo Recipe Sign in</p>
+              <p class="description text-center">Nemo Recipe Modification</p>
               
               <div class="card-body" style="height: 400px;">
               
@@ -143,7 +83,7 @@ function signUp(){
                       <i class="material-icons">face</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="ID..." name="user_id">
+                  <input type="text" class="form-control" value="<%=member.getUser_id() %>" name="user_id" readonly="readonly">
                 </div>
                 
                 <!-- Password 입력 -->
@@ -172,7 +112,7 @@ function signUp(){
               
               <!-- Sign in 버튼 -->  
               <div class="footer text-center">
-                <button name="sign" class="btn btn-primary btn-link btn-wd btn-lg">Sign Up</button>
+                <button name="update" class="btn btn-primary btn-link btn-wd btn-lg" onclick="alert('회원정보 변경완료 ! 다시 로그인 해주세요')">modification</button>
               </div>
               
             </form>
@@ -182,42 +122,9 @@ function signUp(){
       </div>
     </div>
     
-    <!-- footer 영역 -->
-    <footer class="footer">
-      <div class="container">
-        <nav class="float-left">
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com/">
-                Creative Tim
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/presentation">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/blog">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/license">
-                Licenses
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="copyright float-right">
-          &copy;
-          <script>
-            document.write(new Date().getFullYear())
-          </script>, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a> for a better web.
-        </div>
-      </div>
-    </footer>
+<!-- footer -->
+	<%@ include file="inc/footer.jsp" %>
+  <!-- footer -->
   </div>
   <!--   Core JS Files   -->
   <script src="/resources/client/assets/js/core/jquery.min.js" type="text/javascript"></script>

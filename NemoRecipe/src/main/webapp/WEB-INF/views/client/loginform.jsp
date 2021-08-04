@@ -82,7 +82,7 @@ function loginCheck(){
 						href="javascript:void(0)" onclick=""> Recipe </a></li>
 					<!-- Ranking -->
 					<li class="nav-item"><a class="nav-link"
-						href="/client/ranking_hit" onclick=""> Ranking </a></li>
+						href="/client/ranking" onclick=""> Ranking </a></li>
 					<!-- MyPage -->
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(0)" onclick=""> MyPage </a></li>
@@ -90,7 +90,7 @@ function loginCheck(){
 					<li><a> || </a></li>
 					<!-- 로그인 연결 -->
 					<li class="nav-item"><a class="nav-link"
-						href="/client/loginform"> Login </a></li>
+						href="/client/loginform "> Login </a></li>
 					<!-- 구분선 -->
 					<li><a> || </a></li>
 					<!-- 트위터 연결 -->

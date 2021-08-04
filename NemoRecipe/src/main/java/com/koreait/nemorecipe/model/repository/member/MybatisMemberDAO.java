@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.koreait.nemorecipe.domain.Member;
+import com.koreait.nemorecipe.exception.DMLException;
 import com.koreait.nemorecipe.exception.MemberExistException;
 
 @Repository
@@ -31,7 +32,10 @@ public class MybatisMemberDAO implements MemberDAO{
 
 	@Override
 	public void update(Member member) {
-		// TODO Auto-generated method stub
+		int result = sqlSessionTemplate.update("Member.update", member);
+		if(result==0) {
+			throw new DMLException("정보 변경 실패");
+		}
 		
 	}
 

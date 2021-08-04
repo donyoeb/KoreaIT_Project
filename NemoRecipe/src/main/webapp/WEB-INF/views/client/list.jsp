@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%
-
-	List<Recipe> RecipeList = (List)request.getAttribute("recipeList");
-
 	/* List<Board> boardList = boardDAO.selectAll(); //총 레코드수 가져오기 */
 	/* int totalRecord=boardList.size();//총 게시물 수
 	

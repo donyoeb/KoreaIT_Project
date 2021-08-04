@@ -50,12 +50,6 @@
 <link href="/resources/client/assets/css/material-kit.css" rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/resources/client/assets/demo/demo.css" rel="stylesheet" />
-<script src="/resources/client/assets/js/material-kit.js" type="text/javascript"></script>
-<script type="text/javascript">
-function SortLike(){
-	$("#items").html("");
-}
-</script>
 </head>
 
 <body class="index-page sidebar-collapse">
@@ -105,12 +99,10 @@ function SortLike(){
 	      <div class="title" style="position: relative;">
 	        <h2 style="float: left;">Nemo Recipe</h2>
 	        <!-- 좋아요 순 /조회 순 정렬 Start-->
-	        <div class = "" style="float: right; margin-top: 40px">
-	        <a href="/client/list">최신순</a>
-	          <span>/</span>
-	          <a href="/client/listLike">좋아요순</a>
-	          <span>/</span>
-	          <a href="/client/listHit">조회순</a>
+	        <div class = "button_area">
+	          <a href="" style="font: dotum;">좋아요 순</a>
+	          <a>/</a>
+	          <a href="">조회 순</a>
     		</div>
         	<!-- 좋아요 순 /조회 순 정렬 End -->
 	      </div>
@@ -119,7 +111,7 @@ function SortLike(){
 	      <hr style="border: 1px solid grey;"> <!-- 수평선 -->
 	      <br><br><br>
 	      <!-- 아이템 전체 -->
-	      <div class="row" style="position: relative;" >
+	      <div class="row" style="position: relative;">
 	        
 	        <%for(Recipe recipe : recipeList){ %>
 	        <!-- 아이템 -->
@@ -130,7 +122,7 @@ function SortLike(){
 	          	<img src="/resources/data/<%=recipe.getRecipe_img() %>" alt="Rounded Image" class="rounded img-fluid" style="width: 200px; height: 200px">
 	          	<%} %>
 	          	<h4 class="title" style="text-align: center;"><%=recipe.getRecipe_name() %></h4>
-	          	<h6 style="text-align: right; color: #00bcd4"><%=recipe.getMember().getUser_nickname() %> / <%=recipe.getRecipe_date() %></h6>
+	          	<h6 style="text-align: right; color: #00bcd4"><%=member.getUser_nickname()%> / <%=recipe.getRecipe_date() %></h6>
 	        </div>
 	        
 	        <%} %>

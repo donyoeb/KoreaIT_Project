@@ -38,16 +38,6 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
-	public List selectAllLike() {
-		return recipeDAO.selectAllLike();
-	}
-
-	@Override
-	public List selectAllHit() {
-		return recipeDAO.selectAllHit();
-	}
-
-	@Override
 	public void delete(int recipe_id) {
 		
 	}

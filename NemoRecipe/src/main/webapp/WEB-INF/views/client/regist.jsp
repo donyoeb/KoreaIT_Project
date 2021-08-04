@@ -7,10 +7,14 @@
 =========================================================
 Material Kit - v2.0.7
 =========================================================
+
 Product Page: https://www.creative-tim.com/product/material-kit
 Copyright 2020 Creative Tim (https://www.creative-tim.com/)
+
 Coded by Creative Tim
+
 =========================================================
+
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
@@ -258,9 +262,11 @@ The above copyright notice and this permission notice shall be included in all c
 		$(document).ready(function() {
 			//init DateTimePickers
 			materialKit.initFormExtendedDatetimepickers();
+
 			// Sliders Init
 			materialKit.initSliders();
 		});
+
 		function scrollToDownload() {
 			if ($('.section-download').length != 0) {
 				$("html, body").animate({
