@@ -39,20 +39,24 @@
 	<context:component-scan base-package="com.koreait.nemorecipe.model"/>
 	
 	<!-- 어댑터 등록 -->
-	<!-- <bean id="" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	<bean id="" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
 			<list value-type="java.util.ArrayList">
 				<ref bean="mappingJackson2HttpMessageConverter"/>
 			</list>
 		</property>	
-	</bean> -->
+	</bean>
 	
 	<!-- jackson binder등록 컨버터 -->
-	<!-- <bean id="mappingJackson2HttpMessageConverter" 
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<bean id="mappingJackson2HttpMessageConverter" 
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<value>application/json;charset=utf-8</value>
 		</property>
-	</bean> -->
+	</bean>
+	
+	<!-- 스프링은 아파치 파일업로드를 사용함 , 업로드를 자동적으로 처리해주는 빈을 등록 -->
+    <bean id="multipartResolver" 
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 	
 </beans>

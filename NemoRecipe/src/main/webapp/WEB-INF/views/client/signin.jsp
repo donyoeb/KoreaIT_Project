@@ -33,6 +33,23 @@ The above copyright notice and this permission notice shall be included in all c
   <link href="/resources/client/assets/demo/demo.css" rel="stylesheet" />
   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function(){
+	$("button[name='sign']").click(function(){
+		signUp();
+	});
+});
+
+function signUp(){
+	//서버에 회원가입 요청
+	$("form").attr({
+		"action":"/client/signup",
+		"method":"post"
+	});
+	$("form").submit();
+}
+
+</script>
 </head>
 
 <!-- 상단 네비게이션 바 -->
@@ -64,7 +81,7 @@ The above copyright notice and this permission notice shall be included in all c
 						href="javascript:void(0)" onclick=""> Recipe </a></li>
 					<!-- Ranking -->
 					<li class="nav-item"><a class="nav-link"
-						href="/client/ranking" onclick=""> Ranking </a></li>
+						href="/client/ranking_look" onclick=""> Ranking </a></li>
 					<!-- MyPage -->
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(0)" onclick=""> MyPage </a></li>
@@ -109,7 +126,7 @@ The above copyright notice and this permission notice shall be included in all c
           <div class="card card-login">
             
             <!-- 회원가입 카드 영역 -->
-            <form class="form" method="" action="">
+            <form class="form">
               <div class="card-header card-header-primary text-center">
                 <h4 class="card-title">Sign in</h4>
                 
@@ -126,29 +143,8 @@ The above copyright notice and this permission notice shall be included in all c
                       <i class="material-icons">face</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="ID...">
+                  <input type="text" class="form-control" placeholder="ID..." name="user_id">
                 </div>
-                
-                <!-- email 입력 -->
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">mail</i>
-                    </span>
-                  </div>
-                  <input type="email" class="form-control" placeholder="Email...">
-                </div>
-                
-                <!-- phone 입력 -->
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">settings_phone</i>
-                    </span>
-                  </div>
-                  <input type="email" class="form-control" placeholder="Phone...">
-                </div>
-                
                 
                 <!-- Password 입력 -->
                 <div class="input-group">
@@ -157,18 +153,19 @@ The above copyright notice and this permission notice shall be included in all c
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password...">
+                  <input type="password" class="form-control" placeholder="Password..." name="user_pass">
                 </div>
-              
-              <!-- Password Repeat입력 -->
+                
+                <!-- nickname 입력 -->
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">lock_outline</i>
+                      <i class="material-icons">textsms</i>
                     </span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password Repeat...">
+                  <input type="text" class="form-control" placeholder="Nickname..." name="user_nickname">
                 </div>
+                
               </div>
               
               <!-- 로그인 데이터 영역 끝 -->

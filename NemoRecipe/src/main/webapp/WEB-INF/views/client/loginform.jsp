@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+
 <!--
 =========================================================
 Material Kit - v2.0.7
@@ -81,7 +82,7 @@ function loginCheck(){
 						href="javascript:void(0)" onclick=""> Recipe </a></li>
 					<!-- Ranking -->
 					<li class="nav-item"><a class="nav-link"
-						href="/client/ranking" onclick=""> Ranking </a></li>
+						href="/client/ranking_look" onclick=""> Ranking </a></li>
 					<!-- MyPage -->
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(0)" onclick=""> MyPage </a></li>
@@ -127,7 +128,7 @@ function loginCheck(){
           <div class="card card-login">
             
             <!-- 로그인 카드 영역 -->
-            <form class="form" method="" action="">
+            <form class="form">
               <div class="card-header card-header-primary text-center">
                 <h4 class="card-title">Login</h4>
                 
@@ -157,18 +158,9 @@ function loginCheck(){
                       <i class="material-icons">face</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="ID...">
+                  <input type="hidden" name="user_nickname">
+                  <input type="text" class="form-control" placeholder="ID..." name="user_id">
                 </div>
-                
-                <!-- email 입력 -->
-                <!-- <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">mail</i>
-                    </span>
-                  </div>
-                  <input type="email" class="form-control" placeholder="Email...">
-                </div> -->
                 
                 <!-- Password 입력 -->
                 <div class="input-group">
@@ -177,7 +169,7 @@ function loginCheck(){
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password...">
+                  <input type="password" class="form-control" placeholder="Password..." name="user_pass">
                 </div>
               </div>
               <!-- 로그인 데이터 영역 끝 -->

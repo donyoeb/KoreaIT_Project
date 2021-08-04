@@ -1,4 +1,6 @@
+<%@page import="com.koreait.nemorecipe.domain.Member"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -19,13 +19,11 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public List selectAll() {
-		
 		return recipeDAO.selectAll();
 	}
 	
 	@Override
 	public void regist(Recipe recipe)  throws DMLException{
-		
 		recipeDAO.regist(recipe);
 	}
 
@@ -37,6 +35,16 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public void update(Recipe recipe) {
 		
+	}
+
+	@Override
+	public List selectAllLike() {
+		return recipeDAO.selectAllLike();
+	}
+
+	@Override
+	public List selectAllHit() {
+		return recipeDAO.selectAllHit();
 	}
 
 	@Override

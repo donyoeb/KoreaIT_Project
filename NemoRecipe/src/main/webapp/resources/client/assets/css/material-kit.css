@@ -87,6 +87,20 @@
 	width: 150px;
 	height: 50px;
 }
+.error_title{
+	position: absolute;
+	left: 0%;
+	width: 1500px;
+	height: 1000px;
+	padding: 0px;
+	margin: 0px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	box-sizing: border-box;
+	object-fit: contain;
+	background-position: center center;
+	background-image: url("/resources/client/assets/img/nemo_logo/error.png");
+}
 
 .card {
   font-size: .875rem;

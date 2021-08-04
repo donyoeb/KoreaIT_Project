@@ -1,4 +1,10 @@
+<%@page import="com.koreait.nemorecipe.domain.Recipe"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%
+	List<Recipe> recipeList = (List)request.getAttribute("recipeList");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,83 +61,103 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <!-- CSS Files -->
-<link href="/resources/client/assets/css/material-kit.css"	rel="stylesheet" />
-<link href="/resources/client/assets2/css/fresh-bootstrap-table.css"	rel="stylesheet" />
+<link href="/resources/client/assets/css/material-kit.css"
+	rel="stylesheet" />
+<link href="/resources/client/assets2/css/fresh-bootstrap-table.css"
+	rel="stylesheet" />
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script	src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <!-- Demo 삭제 -->
 
 
 </head>
 <body class="index-page sidebar-collapse">
-	  <!-- navi -->
-	<%@ include file="inc/top_navi.jsp" %>
-  <!-- navi -->
+	<!-- navi -->
+	<%@ include file="inc/top_navi.jsp"%>
+	<!-- navi -->
 	<div class="page-header header-filter clear-filter purple-filter"
 		data-parallax="true" style="background-color: white;">
 		<!-- NEMO LOGO TITLE -->
 		<div class="logo_face"></div>
 		<div class="logo_title"></div>
 	</div>
-		<!--   Creative Tim Branding 로고 삭제  -->
-		<!-- 메인 div -->
-		<div class="main main-raised">
-			<div class="section section-basic">
-				<div class="container">
+	<!--   Creative Tim Branding 로고 삭제  -->
+	<!-- 메인 div -->
+	<div class="main main-raised">
+		<div class="section section-basic">
+			<div class="container">
 				<div class="ranking_title"></div>
-					<div class="row">
-						<div class="col-md-8 col-md-offset-2" style="padding: 0px; margin: 0px">
-							<div class="fresh-table full-color-orange" style="width: 1200px; left: 0px; margin: 0px;">
-								<!--
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2"
+						style="padding: 0px; margin: 0px">
+						<div class="fresh-table full-color-orange"
+							style="width: 1200px; left: 0px; margin: 0px;">
+							<!--
           Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
           Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
         -->
-								<div class="toolbar">
-									<button id="alertBtn" class="btn btn-default">Alert</button>
-								</div>
-
-								<table id="fresh-table" class="table">
-									<thead>
-										<th data-field="id">Ranking</th>
-										<th data-field="name" data-sortable="true">Name</th>
-										<th data-field="salary" data-sortable="true">Salary</th>
-										<th data-field="country" data-sortable="true">Country</th>
-										<th data-field="city">City</th>
-										<th data-field="actions" 	data-events="operateEvents"></th>
-										<!-- data-formatter="operateFormatter" 삭제-->
-									</thead>
-									<tbody>
-										<!-- 보기용 데이터 1개 빼고 데이터 삭제 -->
-										<tr>
-											<td>1</td>
-											<td>Dakota Rice</td>
-											<td>$36,738</td>
-											<td>Niger</td>
-											<td>Oud-Turnhout</td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
+								
+							<div class="toolbar">
+								<button onClick="location.href='/client/ranking_look'" class="btn btn-default">조회순 랭킹</button>
+								<button onClick="location.href='/client/ranking_like'" class="btn btn-default">좋아요 랭킹</button>
 							</div>
 
-							<div class="description description-footer">
-								<!-- 트위터, 페이스북 공유 버튼 & 공유 횟수 보여주는 부분 삭제 -->
-								<!-- Copyright -->
+							<table id="fresh-table" class="table">
+								<thead>
+									<th data-field="rank">Ranking</th>
+									<th data-field="img" data-sortable="true">이미지</th>
+									<th data-field="name" data-sortable="true">제목</th>
+									<th data-field="user" data-sortable="true">닉네임</th>
+									<th data-field="cnt">좋아요수/조회수</th>
+									<th data-field="actions" data-events="operateEvents"></th>
+									<!-- data-formatter="operateFormatter" 삭제-->
+								</thead>
+								<tbody>
+									<!-- 보기용 데이터 1개 빼고 데이터 삭제 -->
+									<%int n=0; %>
+									<%for(Recipe recipe : recipeList){%>
+									<tr onclick="">
+										<td><%=++n%></td>
+										<td>
+											<%if(recipe.getRecipe_img().equals("none")){ %> <img
+											src="/resources/client/assets/img/noimage.jpg"
+											alt="Rounded Image" class="rounded img-fluid"
+											style="width: 50px; height: 40px"> <%}else{ %> <img
+											src="/resources/data/<%=recipe.getRecipe_img() %>"
+											alt="Rounded Image" class="rounded img-fluid"
+											style="width: 50px; height: 40px"> <%} %>
+										</td>
+										<td><%=recipe.getRecipe_name()%></td>
+										<td><%=recipe.getMember().getUser_nickname()  %></td>
+										<td><%=recipe.getRecipe_hit() %></td>
+										
+									</tr>
+									<%} %>
+								</tbody>
+							</table>
+						</div>
 
-								<!-- <p>
+						<div class="description description-footer">
+							<!-- 트위터, 페이스북 공유 버튼 & 공유 횟수 보여주는 부분 삭제 -->
+							<!-- Copyright -->
+
+							<!-- <p>
 									Copyright &copy; 2019 <a href="http://creative-tim.com">Creative
 										Tim</a>, made with <i class="fa fa-heart ct-heart"></i> for a
 									better web.
 								</p> -->
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<!-- 하단부 내용 -->
 	<div class="title"></div>
@@ -164,20 +190,26 @@
 			</div>
 		</div>
 	</footer>
-<!--   Core JS Files   -->
-	<script src="/resources/client/assets/js/core/jquery.min.js"		type="text/javascript"></script>
-	<script src="/resources/client/assets/js/core/popper.min.js"		type="text/javascript"></script>
+	<!--   Core JS Files   -->
+	<script src="/resources/client/assets/js/core/jquery.min.js"
+		type="text/javascript"></script>
+	<script src="/resources/client/assets/js/core/popper.min.js"
+		type="text/javascript"></script>
 	<script
-		src="/resources/client/assets/js/core/bootstrap-material-design.min.js"		type="text/javascript"></script>
+		src="/resources/client/assets/js/core/bootstrap-material-design.min.js"
+		type="text/javascript"></script>
 	<script src="/resources/client/assets/js/plugins/moment.min.js"></script>
 	<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
 	<script
-		src="/resources/client/assets/js/plugins/bootstrap-datetimepicker.js"		type="text/javascript"></script>
+		src="/resources/client/assets/js/plugins/bootstrap-datetimepicker.js"
+		type="text/javascript"></script>
 	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-	<script src="/resources/client/assets/js/plugins/nouislider.min.js"		type="text/javascript"></script>
+	<script src="/resources/client/assets/js/plugins/nouislider.min.js"
+		type="text/javascript"></script>
 	<!--  Google Maps Plugin    -->
 	<!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-	<script src="/resources/client/assets/js/material-kit.js?v=2.0.7"		type="text/javascript"></script>
+	<script src="/resources/client/assets/js/material-kit.js?v=2.0.7"
+		type="text/javascript"></script>
 	<script>
 		$(document).ready(function() {
 			//init DateTimePickers
@@ -198,10 +230,15 @@
 	<!-- div class="fixed-plugin" : 설정 버튼 삭제 -->
 
 </body>
+
+
+
 <script type="text/javascript">
 	var $table = $('#fresh-table')
-	var $alertBtn = $('#alertBtn')
-
+	var $lookBtn = $('#lookBtn')
+	var $likeBtn = $('#likeBtn')
+	
+	
 	window.operateEvents = {
 		'click .like' : function(e, value, row, index) {
 			alert('You click like icon, row: ' + JSON.stringify(row))

@@ -1,5 +1,8 @@
+<%@page import="com.koreait.nemorecipe.domain.Member"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-
+<%
+	Member member = (Member)session.getAttribute("member");
+%>
 <head>
 <meta charset="utf-8" />
 <link rel="apple-touch-icon" sizes="76x76"
@@ -48,17 +51,27 @@
 						href="/client/list" onclick=""> Recipe </a></li>
 					<!-- Ranking -->
 					<li class="nav-item"><a class="nav-link"
-						href="/client/ranking" onclick=""> Ranking </a></li>
+						href="/client/ranking_look" onclick=""> Ranking </a></li>
 					<!-- MyPage -->
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(0)" onclick=""> MyPage </a></li>
+						
 					<!-- 구분선 -->
 					<li><a> || </a></li>
-					<!-- 로그인 연결 -->
+					<%if(member!=null){ %>
+					<!-- 로그인 했을 때 -->
+					<li class="nav-item"><a class="nav-link"
+						href="#" style="color: orange;"> <%=member.getUser_nickname() %> 님 </a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/client/logout"> Logout </a></li>
+					<%}else{ %>	
+					<!-- 로그인 아직 안했을 때 -->
 					<li class="nav-item"><a class="nav-link"
 						href="/client/loginform"> Login </a></li>
+					<%} %>
 					<!-- 구분선 -->
 					<li><a> || </a></li>
+					
 					<!-- 트위터 연결 -->
 					<li class="nav-item"><a class="nav-link" rel="tooltip"
 						title="" data-placement="bottom"

@@ -6,4 +6,13 @@
 	<select id="login" parameterType="Member" resultType="Member">
 		select * from member where user_id=#{user_id} and user_pass=#{user_pass}
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="signUp" parameterType="Member">
+		insert into member(user_id, user_pass, user_nickname) values(#{user_id}, #{user_pass}, #{user_nickname})
+	</insert>
+	
+	<select id="select" parameterType="int" resultType="Member">
+		select * from member where member_id=#{member_id}
+	</select>
 </mapper>

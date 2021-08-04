@@ -87,27 +87,36 @@ create table recipe(
 
 -레시피 테이블 ( 포린키 제외버젼)
 create table recipe(
-	recipe_id int primary key auto_increment,
-	member_id int,
-	constraint fk_member_id foreign key (member_id) 
-	 references member(member_id),
-	type varchar(30),
-	situation varchar(30),
-	ingredient varchar(30),
-	method varchar(30),
-	time varchar(30),
-	level varchar(30),
-	serving varchar(30),
-	recipe_name varchar(20),
-	recipe_order varchar(100),
-	recipe_ingredient varchar(100),
-	recipe_hit int default 0,
-	recipe_like int default 0,
-	recipe_img varchar(30),
-	recipe_date timestamp default now()
+    recipe_id int primary key auto_increment,
+    member_id int,
+    constraint fk_member_id foreign key (member_id) 
+     references member(member_id),
+    type varchar(30),
+    situation varchar(30),
+    ingredient varchar(30),
+    method varchar(30),
+    time varchar(30),
+    level varchar(30),
+    serving varchar(30),
+    recipe_name varchar(20),
+    recipe_order varchar(100),
+    recipe_ingredient varchar(100),
+    recipe_hit int default 0,
+    recipe_like int default 0,
+    recipe_img varchar(30),
+    recipe_date timestamp default now()
 )default character set utf8;
 
 	
+-랭크 테이블
+create table rank(
+	rank_id int primary key auto_increment,
+	recipe_id int,
+	constraint fk_recipe_id foreign key (recipe_id) 
+	 references recipe(recipe_id),
+	good_cnt int default 0,
+	view_cnt int default 0
+)default character set utf8;
 
 -후기 테이블
 create table reboard(
