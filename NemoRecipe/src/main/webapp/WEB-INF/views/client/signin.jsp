@@ -81,7 +81,7 @@ function signUp(){
 						href="javascript:void(0)" onclick=""> Recipe </a></li>
 					<!-- Ranking -->
 					<li class="nav-item"><a class="nav-link"
-						href="/client/ranking_look" onclick=""> Ranking </a></li>
+						href="/client/ranking_hit" onclick=""> Ranking </a></li>
 					<!-- MyPage -->
 					<li class="nav-item"><a class="nav-link"
 						href="javascript:void(0)" onclick=""> MyPage </a></li>

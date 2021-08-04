@@ -114,7 +114,7 @@
 									<th data-field="img" data-sortable="true">이미지</th>
 									<th data-field="name" data-sortable="true">제목</th>
 									<th data-field="user" data-sortable="true">닉네임</th>
-									<th data-field="cnt">좋아요수/조회수</th>
+									<th data-field="cnt">조회수</th>
 									<th data-field="actions" data-events="operateEvents"></th>
 									<!-- data-formatter="operateFormatter" 삭제-->
 								</thead>
@@ -136,7 +136,6 @@
 										<td><%=recipe.getRecipe_name()%></td>
 										<td><%=recipe.getMember().getUser_nickname()  %></td>
 										<td><%=recipe.getRecipe_hit() %></td>
-										
 									</tr>
 									<%} %>
 								</tbody>

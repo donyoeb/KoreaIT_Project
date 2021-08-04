@@ -102,7 +102,8 @@
           Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
           Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
         -->
-						<div class="toolbar">
+								
+							<div class="toolbar">
 								<button onClick="location.href='/client/ranking_look'" class="btn btn-default">조회순 랭킹</button>
 								<button onClick="location.href='/client/ranking_like'" class="btn btn-default">좋아요 랭킹</button>
 							</div>
@@ -113,7 +114,7 @@
 									<th data-field="img" data-sortable="true">이미지</th>
 									<th data-field="name" data-sortable="true">제목</th>
 									<th data-field="user" data-sortable="true">닉네임</th>
-									<th data-field="cnt">좋아요수/조회수</th>
+									<th data-field="cnt">좋아요수</th>
 									<th data-field="actions" data-events="operateEvents"></th>
 									<!-- data-formatter="operateFormatter" 삭제-->
 								</thead>
@@ -135,7 +136,6 @@
 										<td><%=recipe.getRecipe_name()%></td>
 										<td><%=recipe.getMember().getUser_nickname()  %></td>
 										<td><%=recipe.getRecipe_like() %></td>
-										
 									</tr>
 									<%} %>
 								</tbody>
@@ -229,6 +229,8 @@
 	<!-- div class="fixed-plugin" : 설정 버튼 삭제 -->
 
 </body>
+
+
 
 <script type="text/javascript">
 	var $table = $('#fresh-table')

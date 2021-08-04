@@ -38,7 +38,9 @@ public class ClientController {
 	private FileManager fileManager;
 	
 	Member obj;
+
 	
+
 	//메인화면 요청처리
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainForm(HttpServletRequest request) {
@@ -88,13 +90,13 @@ public class ClientController {
 	}
 	
 	//랭킹 화면 요청처리
-	@RequestMapping(value="/ranking_look", method=RequestMethod.GET)
+	@RequestMapping(value="/ranking_hit", method=RequestMethod.GET)
 	public String rankingForm_look(Model model , HttpServletRequest request) {
 		
 		List recipeList = recipeService.selectAllHit();
 		model.addAttribute("recipeList", recipeList);
 		
-		return "client/ranking_look";
+		return "client/ranking_hit";
 	}
 	
 	//랭킹 화면 요청처리
@@ -107,6 +109,13 @@ public class ClientController {
 		return "client/ranking_like";
 	}
 	
+
+	//마이페이지 요청처리
+	@RequestMapping(value="/mypage", method=RequestMethod.GET)
+	public String mypageForm() {
+		System.out.println("mypage called");
+		return "client/mypage";
+	}
 	
 	
 	//회원가입 폼 요청처리
