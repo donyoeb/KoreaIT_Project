@@ -24,7 +24,7 @@ public class ClientSessionCheckAspect {
 		String uri = request.getRequestURI();
 		
 		Object result = null;
-		if(uri.equals("/client/loginform") || uri.equals("/client/main") || uri.equals("/client/signin") || uri.equals("/client/login") || uri.equals("/client/signup")|| uri.equals("/client/updateform")|| uri.equals("/client/update")) {
+		if(uri.equals("/client/loginform") || uri.equals("/client/main") || uri.equals("/client/signin") || uri.equals("/client/login") || uri.equals("/client/signup")) {
 			//검증이 필요 X
 			result = joinPoint.proceed(); //원래의 메서드 호출 후, 반환 값을 받음
 		}else {

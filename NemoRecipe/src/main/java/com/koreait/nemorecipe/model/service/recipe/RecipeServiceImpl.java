@@ -28,13 +28,28 @@ public class RecipeServiceImpl implements RecipeService{
 	}
 
 	@Override
+	public void addHit(int recipe_id) {
+		recipeDAO.addHit(recipe_id);
+	}
+
+	@Override
 	public Recipe select(int recipe_id) {
-		return null;
+		return recipeDAO.select(recipe_id);
 	}
 
 	@Override
 	public void update(Recipe recipe) {
 		
+	}
+
+	@Override
+	public List selectAllLike() {
+		return recipeDAO.selectAllLike();
+	}
+
+	@Override
+	public List selectAllHit() {
+		return recipeDAO.selectAllHit();
 	}
 
 	@Override

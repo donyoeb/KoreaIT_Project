@@ -1,6 +1,7 @@
 package com.koreait.nemorecipe.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,4 +32,6 @@ public class Recipe {
 	private String recipe_date; //등록시간
 	private int recipe_hit; // 조회수
     private int recipe_like; // 좋아요 수
+    
+    private Member member;//작성자 닉네임 가져오기 위해서
 }

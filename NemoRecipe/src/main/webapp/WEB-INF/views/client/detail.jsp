@@ -1,8 +1,8 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="javax.naming.spi.DirStateFactory.Result"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="com.mysql.jdbc.Connection"%>
+<%@page import="com.koreait.nemorecipe.domain.Recipe"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%
+	Recipe recipe = (Recipe)request.getAttribute("recipe");
+%>
 <!--
 =========================================================
 Material Kit - v2.0.7
@@ -48,9 +48,6 @@ The above copyright notice and this permission notice shall be included in all c
 
 <script>
 /* text area 자동 높이 설정 */
-
-
-
 	$(function() {
 		CKEDITOR.replace("content");
 
@@ -106,14 +103,19 @@ The above copyright notice and this permission notice shall be included in all c
 					<!-- Title -->
 					<div class="detail_section">
 						<input type="text" style="font-size: 30px; font-weight: bold; border: none;" value="레시피 등록" readonly/>
+						<img src="/resources/client/assets/img/list/like.png" style="float: right; width: 100px; height: 100px; cursor: pointer;">
 					</div>
 					<div class="space-50"></div> <!-- 페이지 공백 -->
 					<!-- 이미지 -->
 					<div class="title_section" >요리 사진</div>
 					<div class="space-50"></div> <!-- 페이지 공백 -->
 					<div class="detail_section">
-					<div style="width: 400px; height:400px; margin: auto;">
-						<img class="detail_img" src="">
+					<div style="width: 600px; height:400px; margin: auto;">
+						<%if(recipe.getRecipe_img().equals("none")){ %>
+			        	<img src="/resources/client/assets/img/noimage.jpg" alt="Rounded Image" class="rounded img-fluid" style="width: 100%; height: 100%">
+			        	<%}else{ %>
+			          	<img src="/resources/data/<%=recipe.getRecipe_img() %>" alt="Rounded Image" class="rounded img-fluid" style="width: 100%; height: 100%">
+			          	<%} %>
 					</div>
 					</div>
 					<div class="space-50"></div> <!-- 페이지 공백 -->
@@ -121,57 +123,72 @@ The above copyright notice and this permission notice shall be included in all c
 					
 					<!-- 인분, 시간, 난이도 -->
 					<div class="title_section" >요리 정보</div>
+					
 					<div class="space-50"></div> <!-- 페이지 공백 -->
+					
 					<div class="detail_section">
-					<div style="width: 600px; height:100px; margin: auto;">
-					<div class="button_area">
-						<div class="detail_category" style="background-image: url('/resources/client/assets/img/detail/cook_for.png');"></div>
-						<input type="text" name="category" value="인분" style="border: none;" readonly/>
-					</div>
-					<div class="button_area">
-						<div class="detail_category" style="background-image: url('/resources/client/assets/img/detail/cook_time.png');"></div>
-						<input type="text" name="category" value="조리시간" style="border: none;" readonly/>
-					</div>
-					<div class="button_area">
-						<div class="detail_category" style="background-image: url('/resources/client/assets/img/detail/cook_level.png');"></div>
-						<input type="text" name="category" value="난이도" style="border: none;" readonly/>
-					</div>
-					</div>
+						<div style="width: 600px; height:100px; margin: auto;">
+							<div class="button_area">
+								<div class="detail_category" style="background-image: url('/resources/client/assets/img/detail/cook_for.png');"></div>
+								<input type="text" name="category" value="<%=recipe.getLevel() %>" style="border: none;" readonly/>
+							</div>
+							<div class="button_area">
+								<div class="detail_category" style="background-image: url('/resources/client/assets/img/detail/cook_time.png');"></div>
+								<input type="text" name="category" value="<%=recipe.getTime() %>" style="border: none;" readonly/>
+							</div>
+							<div class="button_area">
+								<div class="detail_category" style="background-image: url('/resources/client/assets/img/detail/cook_level.png');"></div>
+								<input type="text" name="category" value="<%=recipe.getServing() %>" style="border: none;" readonly/>
+							</div>
+						</div>
 					</div>
 					<!-- 인분, 시간, 난이도 끝 -->
+					
 					<div class="space-50"></div> <!-- 페이지 공백 -->
+					
+					
 					<!-- 재료 -->
 					<div class="title_section" >요리 재료</div>
+					
 					<div class="space-50"></div> <!-- 페이지 공백 -->
+					
+					<%
+						String str = recipe.getRecipe_ingredient();
+						String[] arr_recipe_ing = str.split(",");
+					%>
 					<div class="detail_section">
+						<%for(int i=0;i<arr_recipe_ing.length;i++){ %>
 						<div class="detail_ingredient" style="border-bottom-color: gray; border-bottom-style: solid; border-width: thin;">
-							<input style="text-align: left; border: none; width: 500px;" name="recipe_ingredient" type="text" value="재료 이름" readonly/>
-							<input style="text-align: right;border: none; width: auto;"	name="recipe_in redient" type="text" value="재료 무게" readonly/>
+							<input style="text-align: left; border: none; width: 500px;" name="recipe_ingredient" type="text" value="<%=arr_recipe_ing[i++] %>" readonly/>
+							<input style="text-align: right;border: none; width: auto;"	name="recipe_in redient" type="text" value="<%=arr_recipe_ing[i] %>" readonly/>
 						</div>
-						<div class="detail_ingredient" style="border-bottom-color: gray; border-bottom-style: solid; border-width: thin;">
-							<input style="text-align: left; border: none; width: 500px;" name="recipe_ingredient" type="text" value="재료 이름" readonly/>
-							<input style="text-align: right;border: none; width: auto;"	name="recipe_in redient" type="text" value="재료 무게" readonly/>
-						</div>
+						<%} %>
+						
 					</div>
+					<!-- 재료 끝 -->
+					
 					<div class="space-50"></div> <!-- 페이지 공백 -->
+					
 					<!-- 요리 순서 -->
 					<div class="title_section" >요리 순서</div>
+					
 					<div class="space-50"></div> <!-- 페이지 공백 -->
-					<div class="detail_section">
-						<div style="width: 800px; height:auto; margin: auto;">
-							<textarea class="recipe_order" name="recipe_order" rows="50" readonly="readonly">
-							
-							</textarea>
-							<span>
-							
-							</span>
+					
+					<%
+						String order = recipe.getRecipe_order().replace("\r\n", "<br>"); 
+					%>
+					<div class="">
+						<div style="width: 100%; height:auto; margin: auto; border: solid 2px black; padding: 40px 30px;">
+							<span><%=order %></span>
 						</div>
 					</div>
 					
 					<!-- 내용 끝 -->
 				</div>
+				
 				<div class="space-50"></div> <!-- 페이지 공백 -->
 				<div class="space-50"></div> <!-- 페이지 공백 -->
+				
 				<div class="detail_section">
 					<div class="button_area">
 						<input class="pretty_button" type="button" value="수정" id="bt_edit">
@@ -193,30 +210,12 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 	<!--  End Modal -->
-	<footer class="footer" data-background-color="black">
-		<div class="container">
-			<nav class="float-left">
-				<ul>
-					<li><a href="https://www.creative-tim.com/"> Creative Tim
-					</a></li>
-					<li><a href="https://www.creative-tim.com/presentation">
-							About Us </a></li>
-					<li><a href="https://www.creative-tim.com/blog"> Blog </a></li>
-					<li><a href="https://www.creative-tim.com/license">
-							Licenses </a></li>
-				</ul>
-			</nav>
-			<div class="copyright float-right">
-				&copy;
-				<script>
-					document.write(new Date().getFullYear())
-				</script>
-				, made with <i class="material-icons">favorite</i> by <a
-					href="https://www.creative-tim.com/" target="_blank">NemoForU</a>
-				for a better web.
-			</div>
-		</div>
-	</footer>
+	
+	<!-- Footer -->
+    <%@ include file="inc/footer.jsp" %>
+    <!-- Footer End -->
+	
+	
 	<!--   Core JS Files   -->
 	<script src="/resources/client/assets/js/core/jquery.min.js"
 		type="text/javascript"></script>

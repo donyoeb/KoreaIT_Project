@@ -12,4 +12,7 @@ public interface RecipeDAO {
 	public Recipe select(int recipe_id);
 	public void update(Recipe recipe); //회원가입
 	public void delete(int recipe_id);
+	public List selectAllLike(); //좋아요순
+	public List selectAllHit(); //조회수순
+	public void addHit(int recipe_id); //조회수 증가
 }

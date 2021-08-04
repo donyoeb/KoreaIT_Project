@@ -90,7 +90,7 @@ function loginCheck(){
 					<li><a> || </a></li>
 					<!-- 로그인 연결 -->
 					<li class="nav-item"><a class="nav-link"
-						href="/client/loginform "> Login </a></li>
+						href="/client/loginform"> Login </a></li>
 					<!-- 구분선 -->
 					<li><a> || </a></li>
 					<!-- 트위터 연결 -->
@@ -187,42 +187,11 @@ function loginCheck(){
       </div>
     </div>
     
-    <!-- footer 영역 -->
-    <footer class="footer">
-      <div class="container">
-        <nav class="float-left">
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com/">
-                Creative Tim
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/presentation">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/blog">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/license">
-                Licenses
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="copyright float-right">
-          &copy;
-          <script>
-            document.write(new Date().getFullYear())
-          </script>, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a> for a better web.
-        </div>
-      </div>
-    </footer>
+    <!-- Footer -->
+    <%@ include file="inc/footer.jsp" %>
+    <!-- Footer End -->
+    
+    
   </div>
   <!--   Core JS Files   -->
   <script src="/resources/client/assets/js/core/jquery.min.js" type="text/javascript"></script>

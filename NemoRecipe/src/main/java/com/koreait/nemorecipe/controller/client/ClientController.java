@@ -43,7 +43,13 @@ public class ClientController {
 	
 	//메인화면 요청처리
 	@RequestMapping(value="/main", method=RequestMethod.GET)
-	public String mainForm(HttpServletRequest request) {
+	public String mainForm(Model model, HttpServletRequest request) {
+		//3단계: 일 시키기
+		List recipeList = recipeService.selectAllLike();
+		
+		//4단계: 결과 저장
+		model.addAttribute("recipeList", recipeList);
+		
 		return "client/main";
 	}
 	
@@ -59,22 +65,79 @@ public class ClientController {
 		return "client/recipe_list";
 	}
 	
+	//글 목록 좋아요순 처리
+	@RequestMapping(value="/listLike", method=RequestMethod.GET)
+	public String listLike(Model model, HttpServletRequest request) {
+		//3단계: 일 시키기
+		List recipeList = recipeService.selectAllLike();
+		
+		//4단계: 결과 저장
+		model.addAttribute("recipeList", recipeList);
+		
+		return "client/recipe_list";
+	}
+	
+	//글 목록 좋아요순 처리
+	@RequestMapping(value="/listHit", method=RequestMethod.GET)
+	public String listHit(Model model, HttpServletRequest request) {
+		//3단계: 일 시키기
+		List recipeList = recipeService.selectAllHit();
+		
+		//4단계: 결과 저장
+		model.addAttribute("recipeList", recipeList);
+		
+		return "client/recipe_list";
+	}
+	
 	//글작성화면 요청처리
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
 	public String registForm(HttpServletRequest request) {
 		return "client/regist";
 	}
 	
-	//글상세화면 요청처리
+	//글 상세화면 요청처리
 	@RequestMapping(value="/detail", method=RequestMethod.GET)
-	public String detailForm(HttpServletRequest request) {
+	public String detailForm(int recipe_id, HttpServletRequest request, Model model) {
+		//3단계: 일 시키기
+		Recipe recipe = recipeService.select(recipe_id); //레시피 1개 조회
+		recipeService.addHit(recipe_id);
+		
+		//4단계: 결과 저장
+		model.addAttribute("recipe", recipe);
+		
 		return "client/detail";
 	}
 	
-	//랭킹 화면 요청처리
-	@RequestMapping(value="/ranking", method=RequestMethod.GET)
-	public String rankingForm(HttpServletRequest request) {
-		return "client/ranking";
+	//좋아요 증가 요청 처리
+	@RequestMapping(value="/addLike", method=RequestMethod.GET)
+	public String addLike(int recipe_id, HttpServletRequest request, Model model) {
+		//3단계: 일 시키기
+		Recipe recipe = recipeService.select(recipe_id);
+		
+		//4단계: 결과 저장
+		model.addAttribute("recipe", recipe);
+		
+		return "redirect:/client/detail?recipe_id="+recipe_id;
+	}
+	
+	//랭킹 화면 조회수순 요청처리
+	@RequestMapping(value="/ranking_hit", method=RequestMethod.GET)
+	public String rankingForm_look(Model model , HttpServletRequest request) {
+		
+		List recipeList = recipeService.selectAllHit();
+		model.addAttribute("recipeList", recipeList);
+		
+		return "client/ranking_hit";
+	}
+	
+	//랭킹 화면 좋아요순 요청처리
+	@RequestMapping(value="/ranking_like", method=RequestMethod.GET)
+	public String rankingForm_like(Model model , HttpServletRequest request) {
+		
+		List recipeList = recipeService.selectAllLike();
+		model.addAttribute("recipeList", recipeList);
+		
+		return "client/ranking_like";
 	}
 	
 	//회원가입 폼 요청처리
@@ -83,10 +146,36 @@ public class ClientController {
 		return "client/signin";
 	}
 	
+	//회원정보수정 폼 요청처리
+	@RequestMapping(value="/updateform", method=RequestMethod.GET)
+	public String updateform(HttpServletRequest request) {
+		return "client/updateform";
+	}
+		
+	//회원정보수정 요청 처리
+	@PostMapping("/update")
+	public String update(Member member, HttpServletRequest request) {
+		//3단계: 일 시키기
+		memberService.update(member);
+		
+		//4단계: 결과 저장
+		HttpSession session = request.getSession();
+		session.setAttribute("member", null); //request가 아닌 session에 저장함
+		
+		return "redirect:/client/loginform";
+	}
+	
 	//로그인 폼 요청처리
 	@RequestMapping(value="/loginform", method=RequestMethod.GET)
 	public String loginform(HttpServletRequest request) {
 		return "client/loginform";
+	}
+	
+	//마이페이지 요청처리
+	@RequestMapping(value="/mypage", method=RequestMethod.GET)
+	public String mypageForm(HttpServletRequest request) {
+		System.out.println("mypage called");
+		return "client/mypage";
 	}
 	
 	//로그인 요청처리
@@ -127,25 +216,6 @@ public class ClientController {
 		
 		return "redirect:/client/loginform";
 	}
-	
-	//회원정보수정 폼 요청처리
-		@RequestMapping(value="/updateform", method=RequestMethod.GET)
-		public String updateform(HttpServletRequest request) {
-			return "client/updateform";
-		}
-	//회원정보수정 요청 처리
-	@PostMapping("/update")
-	public String update(Member member, HttpServletRequest request) {
-		//3단계: 일 시키기
-		memberService.update(member);
-		
-		//4단계: 결과 저장
-		HttpSession session = request.getSession();
-		session.setAttribute("member", null); //request가 아닌 session에 저장함
-		
-		return "redirect:/client/main";
-	}
-	
 	
 	//레시피 등록
     @RequestMapping(value = "/regist_recipe", method = RequestMethod.POST)

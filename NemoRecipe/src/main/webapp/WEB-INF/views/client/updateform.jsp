@@ -122,8 +122,8 @@ function updateUp(){
       </div>
     </div>
     
-<!-- footer -->
-	<%@ include file="inc/footer.jsp" %>
+  <!-- footer -->
+  <%@ include file="inc/footer.jsp" %>
   <!-- footer -->
   </div>
   <!--   Core JS Files   -->

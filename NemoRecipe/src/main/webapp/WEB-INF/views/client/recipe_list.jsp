@@ -50,6 +50,12 @@
 <link href="/resources/client/assets/css/material-kit.css" rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/resources/client/assets/demo/demo.css" rel="stylesheet" />
+<script src="/resources/client/assets/js/material-kit.js" type="text/javascript"></script>
+<script type="text/javascript">
+function SortLike(){
+	$("#items").html("");
+}
+</script>
 </head>
 
 <body class="index-page sidebar-collapse">
@@ -74,7 +80,7 @@
         <!--                 inputs -->
         <div id="inputs">
           <div style="width: 100%; position: relative; margin-top: -30px">
-	       	<div style="background-image: url('/resources/client/assets/img/nemo_logo_title.png'); background-size: 200px; width: 200px; height: 200px; float: left; margin-top: -50px;"></div>
+	       	<div style="background-image: url('/resources/client/assets/img/nemo_logo/nemo_logo_title.png'); background-size: 200px; width: 200px; height: 200px; float: left; margin-top: -50px;"></div>
 	        <div class="form-group" style="width: 68%; float: left; margin-left: 10px;">
 	          <label for="exampleInput1" class="bmd-label-floating">원하는 레시피를 입력해주세요</label>
 	          <input type="text" class="form-control" id="exampleInput1">
@@ -97,12 +103,14 @@
 	    <div id="images">
 	      <!-- 중간 제목 -->
 	      <div class="title" style="position: relative;">
-	        <h2 style="float: left;">Nemo Recipe</h2>
+	        <h2 style="float: left;">총 <span style="color: red; font-weight: bold;"><%=recipeList.size() %></span> 개의 레시피가 있습니다</h2>
 	        <!-- 좋아요 순 /조회 순 정렬 Start-->
-	        <div class = "button_area">
-	          <a href="" style="font: dotum;">좋아요 순</a>
-	          <a>/</a>
-	          <a href="">조회 순</a>
+	        <div class = "" style="float: right; margin-top: 40px">
+	        <a href="/client/list">최신순</a>
+	          <span>/</span>
+	          <a href="/client/listLike">좋아요순</a>
+	          <span>/</span>
+	          <a href="/client/listHit">조회순</a>
     		</div>
         	<!-- 좋아요 순 /조회 순 정렬 End -->
 	      </div>
@@ -111,18 +119,18 @@
 	      <hr style="border: 1px solid grey;"> <!-- 수평선 -->
 	      <br><br><br>
 	      <!-- 아이템 전체 -->
-	      <div class="row" style="position: relative;">
+	      <div class="row" style="position: relative;" >
 	        
 	        <%for(Recipe recipe : recipeList){ %>
 	        <!-- 아이템 -->
-	        <div style="width: 200px; height: 370px; float: left; margin: 0px 2.5rem; margin-left: 2.5rem; text-align: center">
+	        <div style="width: 200px; height: 370px; float: left; margin: 0px 2.5rem; margin-left: 2.5rem; text-align: center; cursor: pointer;" onClick="location.href='/client/detail?recipe_id=<%=recipe.getRecipe_id()%>';">
 	        	<%if(recipe.getRecipe_img().equals("none")){ %>
 	        	<img src="/resources/client/assets/img/noimage.jpg" alt="Rounded Image" class="rounded img-fluid" style="width: 200px; height: 200px">
 	        	<%}else{ %>
 	          	<img src="/resources/data/<%=recipe.getRecipe_img() %>" alt="Rounded Image" class="rounded img-fluid" style="width: 200px; height: 200px">
 	          	<%} %>
 	          	<h4 class="title" style="text-align: center;"><%=recipe.getRecipe_name() %></h4>
-	          	<h6 style="text-align: right; color: #00bcd4"><%=member.getUser_nickname()%> / <%=recipe.getRecipe_date() %></h6>
+	          	<h6 style="text-align: right; color: #00bcd4"><%=recipe.getMember().getUser_nickname() %> / <%=recipe.getRecipe_date() %></h6>
 	        </div>
 	        
 	        <%} %>
@@ -157,43 +165,11 @@
   <!-- 메인 전체 End -->
   
   
-  <!--  Footer -->
-  <footer class="footer" data-background-color="black">
-    <div class="container">
-      <nav class="float-left">
-        <ul>
-          <li>
-            <a href="https://www.creative-tim.com/">
-              Creative Tim
-            </a>
-          </li>
-          <li>
-            <a href="https://www.creative-tim.com/presentation">
-              About Us
-            </a>
-          </li>
-          <li>
-            <a href="https://www.creative-tim.com/blog">
-              Blog
-            </a>
-          </li>
-          <li>
-            <a href="https://www.creative-tim.com/license">
-              Licenses
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div class="copyright float-right">
-        &copy;
-        <script>
-          document.write(new Date().getFullYear())
-        </script>, made with <i class="material-icons">favorite</i> by
-        <a href="https://www.creative-tim.com/" target="_blank">Creative Tim</a> for a better web.
-      </div>
-    </div>
-  </footer>
+  <!-- Footer -->
+  <%@ include file="inc/footer.jsp" %>
   <!-- Footer End -->
+  
+  
   
   <!--   Core JS Files   -->
   <script src="/resources/client/assets/js/core/jquery.min.js" type="text/javascript"></script>

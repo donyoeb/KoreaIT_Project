@@ -36,7 +36,6 @@ public class MybatisMemberDAO implements MemberDAO{
 		if(result==0) {
 			throw new DMLException("정보 변경 실패");
 		}
-		
 	}
 
 	@Override
