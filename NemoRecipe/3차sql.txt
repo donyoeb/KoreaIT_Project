@@ -99,7 +99,7 @@ create table recipe(
 	level varchar(30),
 	serving varchar(30),
 	recipe_name varchar(20),
-	recipe_order varchar(100),
+	recipe_order varchar(900),
 	recipe_ingredient varchar(100),
 	recipe_hit int default 0,
 	recipe_like int default 0,

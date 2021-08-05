@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.koreait.nemorecipe.domain.Checking;
 import com.koreait.nemorecipe.domain.Recipe;
 import com.koreait.nemorecipe.exception.DMLException;
 
@@ -21,6 +22,32 @@ public class MybatisRecipeDAO implements RecipeDAO{
 	public void regist(Recipe recipe) throws DMLException {
 		sqlSessionTemplate.insert("recipe.insert", recipe);
 		
+	}
+	
+	@Override
+	public List selectAllMy(int member_id) {
+		return sqlSessionTemplate.selectList("recipe.selectAllMy", member_id);
+	}
+
+	@Override
+	public List search(String word) {
+		return sqlSessionTemplate.selectList("recipe.search", word);
+	}
+	
+	@Override
+	public Checking checkLike(Checking checking) {
+		return sqlSessionTemplate.selectOne("recipe.selectCheckLike", checking);
+	}
+
+	@Override
+	public void registChecking(Checking checking) {
+		sqlSessionTemplate.insert("recipe.insertCheckLike", checking);
+	}
+
+
+	@Override
+	public void updateChecking(int index) {
+		sqlSessionTemplate.update("recipe.updateChecking", index);
 	}
 
 

@@ -27,6 +27,13 @@
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="/resources/client/assets/demo/demo.css" rel="stylesheet" />
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+function search(){
+	var word = $('#exampleInput1').val();
+	location.href="/client/search?word="+word;
+}
+</script>
 
 <body class="index-page sidebar-collapse">
 
@@ -53,10 +60,12 @@
 	       	<div style="background-image: url('/resources/client/assets/img/nemo_logo/nemo_logo_title.png'); background-size: 200px; width: 200px; height: 200px; float: left; margin-top: -50px;"></div>
 	        <div class="form-group" style="width: 68%; float: left; margin-left: 10px;">
 	          <label for="exampleInput1" class="bmd-label-floating">원하는 레시피를 입력해주세요</label>
-	          <input type="text" class="form-control" id="exampleInput1">
+	          <form>
+	          	<input type="text" class="form-control" id="exampleInput1">
+	          </form>
 	          <span class="bmd-help">네가 좋아할만한 모든 레시피!!</span>
 	        </div>
-	        <button class="btn btn-primary btn-round" style="margin-left: 20px; margin-top: 15px;">Search</button>
+	        <button class="btn btn-primary btn-round" style="margin-left: 20px; margin-top: 15px;" onclick="search();">Search</button>
 	      </div>
         </div>
         <!--                 end inputs -->
@@ -98,11 +107,11 @@
                     </div>
                   </div>
                   <div class="carousel-item">
-                    <img class="d-block w-100" style="height: 550px;" src="/resources/client/assets/img/bg.jpg" alt="Third slide">
+                    <a href="/client/detail?recipe_id=<%=recipeList.get(0).getRecipe_id() %>"><img class="d-block w-100" style="height: 550px;" src="/resources/data/<%=recipeList.get(0).getRecipe_img() %>" alt="Third slide"></a>
                     <div class="carousel-caption d-none d-md-block">
                       <h3>
                         <i class="material-icons">location_on</i>
-                        Yellowstone National Park, United States
+                        가장 인기있는 레시피!! 한 번 구경해보세요
                       </h3>
                     </div>
                   </div>
@@ -169,7 +178,7 @@
 	
     
     <!-- 마지막 SNS 참조 -->
-    <div class="section section-download" id="downloadSection">
+    <!-- <div class="section section-download" id="downloadSection">
       <div class="container">
         <br><br>
         <div class="sharing-area text-center">
@@ -194,7 +203,7 @@
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- 마지막 SNS 참조 End -->
     
   </div>

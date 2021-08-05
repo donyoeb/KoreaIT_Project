@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreait.nemorecipe.domain.Checking;
 import com.koreait.nemorecipe.domain.Member;
 import com.koreait.nemorecipe.domain.Recipe;
 import com.koreait.nemorecipe.exception.MemberExistException;
@@ -45,7 +46,7 @@ public class ClientController {
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainForm(Model model, HttpServletRequest request) {
 		//3단계: 일 시키기
-		List recipeList = recipeService.selectAllLike();
+		List recipeList = recipeService.selectAllHit();
 		
 		//4단계: 결과 저장
 		model.addAttribute("recipeList", recipeList);
@@ -77,7 +78,7 @@ public class ClientController {
 		return "client/recipe_list";
 	}
 	
-	//글 목록 좋아요순 처리
+	//글 목록 조회수순 처리
 	@RequestMapping(value="/listHit", method=RequestMethod.GET)
 	public String listHit(Model model, HttpServletRequest request) {
 		//3단계: 일 시키기
@@ -88,6 +89,22 @@ public class ClientController {
 		
 		return "client/recipe_list";
 	}
+	
+	//검색 요청 처리
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public String search(String word, Model model, HttpServletRequest request) {
+		//3단계: 일 시키기
+		List recipeList = recipeService.search(word);
+		
+		logger.info("word는 {} ", word);
+		logger.info("recipeList는 {} ", recipeList);
+		
+		//4단계: 결과 저장
+		model.addAttribute("recipeList", recipeList);
+		
+		return "client/recipe_list";
+	}
+	
 	
 	//글작성화면 요청처리
 	@RequestMapping(value="/regist", method=RequestMethod.GET)
@@ -108,17 +125,22 @@ public class ClientController {
 		return "client/detail";
 	}
 	
-	//좋아요 증가 요청 처리
-	@RequestMapping(value="/addLike", method=RequestMethod.GET)
-	public String addLike(int recipe_id, HttpServletRequest request, Model model) {
-		//3단계: 일 시키기
-		Recipe recipe = recipeService.select(recipe_id);
-		
-		//4단계: 결과 저장
-		model.addAttribute("recipe", recipe);
-		
-		return "redirect:/client/detail?recipe_id="+recipe_id;
-	}
+	//좋아요 여부 체크
+  	@GetMapping("/checkLike")
+  	public String checkLike(Checking checking, HttpServletRequest request) {
+  		//3단계: 일 시키기
+  		Member member = ((Member)request.getSession().getAttribute("member")); //Member 설정
+  		checking.setMember_id(member.getMember_id()); //member_id 설정
+  		
+  		logger.info("memeber_id는 {} ", checking.getMember_id());
+  		logger.info("recipe_id는 {} ", checking.getRecipe_id());
+  		
+  		Checking result = recipeService.checkLike(checking);
+  		
+  		logger.info("result는 {} ", result);
+  		
+  		return "client/list";
+  	}
 	
 	//랭킹 화면 조회수순 요청처리
 	@RequestMapping(value="/ranking_hit", method=RequestMethod.GET)
@@ -173,8 +195,14 @@ public class ClientController {
 	
 	//마이페이지 요청처리
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
-	public String mypageForm(HttpServletRequest request) {
-		System.out.println("mypage called");
+	public String mypageForm(Member member ,HttpServletRequest request,Model model) {
+		
+		List recipeList = recipeService.selectAllMy(member.getMember_id());
+		
+		logger.info("recipeList는 {} ", recipeList);
+		
+		model.addAttribute("recipeList", recipeList);
+
 		return "client/mypage";
 	}
 	
@@ -242,5 +270,6 @@ public class ClientController {
 
         return "redirect:/client/list";
     }
+    
 	
 }

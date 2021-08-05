@@ -105,6 +105,9 @@ The above copyright notice and this permission notice shall be included in all c
 						<input type="text" style="font-size: 30px; font-weight: bold; border: none;" value="레시피 등록" readonly/>
 						<img src="/resources/client/assets/img/list/like.png" style="float: right; width: 100px; height: 100px; cursor: pointer;">
 					</div>
+					<div>
+						<h4>조회 수 : <%=recipe.getRecipe_hit() %> / 좋아요 수 : <%=recipe.getRecipe_like() %></h4>
+					</div>
 					<div class="space-50"></div> <!-- 페이지 공백 -->
 					<!-- 이미지 -->
 					<div class="title_section" >요리 사진</div>
@@ -158,7 +161,7 @@ The above copyright notice and this permission notice shall be included in all c
 					%>
 					<div class="detail_section">
 						<%for(int i=0;i<arr_recipe_ing.length;i++){ %>
-						<div class="detail_ingredient" style="border-bottom-color: gray; border-bottom-style: solid; border-width: thin;">
+						<div class="detail_ingredient" style="border-bottom-color: gray; border-bottom-style: solid; border-width: thin; text-align: center;">
 							<input style="text-align: left; border: none; width: 500px;" name="recipe_ingredient" type="text" value="<%=arr_recipe_ing[i++] %>" readonly/>
 							<input style="text-align: right;border: none; width: auto;"	name="recipe_in redient" type="text" value="<%=arr_recipe_ing[i] %>" readonly/>
 						</div>

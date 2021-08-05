@@ -7,6 +7,7 @@
 		<!-- VO 넣기 -->
 		<typeAlias type="com.koreait.nemorecipe.domain.Member" alias="Member"/>
 		<typeAlias type="com.koreait.nemorecipe.domain.Recipe" alias="Recipe"/>
+		<typeAlias type="com.koreait.nemorecipe.domain.Checking" alias="Checking"/>
 	</typeAliases>
 	
 	<mappers>

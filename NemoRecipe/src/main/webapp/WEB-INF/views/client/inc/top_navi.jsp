@@ -52,10 +52,18 @@
 					<!-- Ranking -->
 					<li class="nav-item"><a class="nav-link"
 						href="/client/ranking_hit" onclick=""> Ranking </a></li>
+					
+					<%if(member!=null){ %>
 					<!-- MyPage -->
 					<li class="nav-item"><a class="nav-link"
+						href="/client/mypage?member_id=<%=member.getMember_id() %>" onclick=""> MyPage </a></li>
+					<%}else{ %>	
+					<li class="nav-item"><a class="nav-link"
 						href="/client/mypage" onclick=""> MyPage </a></li>
-						
+					<%} %>
+					
+					
+					
 					<!-- 구분선 -->
 					<li><a> || </a></li>
 					<%if(member!=null){ %>

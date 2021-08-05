@@ -30,10 +30,37 @@
 		select * from recipe where recipe_id=#{recipe_id}
 	</select>
 	
+	<!-- 내가 쓴 레시피 조회 -->
+	<select id="selectAllMy" parameterType="int" resultMap="RecipeMemberCollection">
+		select * from recipe where member_id=#{member_id}
+	</select>
+	
+	<!-- 검색 조회 -->
+	<select id="search" parameterType="String" resultMap="RecipeMemberCollection">
+		select * from recipe where recipe_name like '%'||#{word}||'%'
+	</select>
+	
 	<!-- 레시피 조회수 증가 -->
 	<update id="addHit" parameterType="int">
 		update recipe set recipe_hit=recipe_hit+1 where recipe_id=#{recipe_id}
 	</update>
+	
+	
+	<!-- 좋아요 여부 확인 -->
+	<select id="selectCheckLike" parameterType="Checking" resultType="Checking">
+		select * from checkLike where recipe_id={recipe_id} and member_id={member_id} 
+	</select>
+	
+	<!-- 좋아요 처음 눌렀을 때 table에 추가 -->
+	<insert id="insertCheckLike" parameterType="Checking">
+		insert into checkLike(recipe_id, member_id) values(#{recipe_id}, #{member_id})
+	</insert>
+	
+	<!-- 좋아요 여부 변경 -->
+	<update id="updateChecking" parameterType="int">
+		update checkLike set checking=#{index}
+	</update>
+	
 	
 	<!-- Member를 컬렉션으로 가져오기 -->
 	<resultMap type="Recipe" id="RecipeMemberCollection">

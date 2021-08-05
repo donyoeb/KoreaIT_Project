@@ -2,16 +2,18 @@
 =========================================================
 Material Kit - v2.0.7
 =========================================================
-
 Product Page: https://www.creative-tim.com/product/material-kit
 Copyright 2020 Creative Tim (https://www.creative-tim.com/)
-
 Coded by Creative Tim
-
 =========================================================
-
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
+<%@page import="com.koreait.nemorecipe.domain.Recipe"%>
+<%@page import="com.koreait.nemorecipe.domain.Member"%>
+<%@page import="java.util.List"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
+
+<%List<Recipe> recipeList = (List)request.getAttribute("recipeList");%>
 <html lang="en">
 <head>
 <link rel="apple-touch-icon" sizes="76x76"
@@ -70,7 +72,7 @@ The above copyright notice and this permission notice shall be included in all c
 									alt="Circle Image" class="img-raised rounded-circle img-fluid">
 							</div>
 							<div class="name">
-								<h3 class="title">user name</h3>
+								<h1 class="title"><%=member.getUser_nickname()%></h1>
 								<a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i
 									class="fa fa-dribbble"></i></a> <a href="#pablo"
 									class="btn btn-just-icon btn-link btn-twitter"><i
@@ -84,7 +86,7 @@ The above copyright notice and this permission notice shall be included in all c
 			</div>
 
 			<div class="description text-center">
-				<p>blabla</p>
+				<p>자기소개를 작성해 주세요</p>
 			</div>
 
 			<div class="row">
@@ -108,21 +110,27 @@ The above copyright notice and this permission notice shall be included in all c
 			</div>
 			<div class="tab-content tab-space">
 				<!-- My Recipe -->
-				<div class="tab-pane active text-center gallery" id="MyRecipe">
-					<div class="row">
-						<div class="col-md-3 ml-auto">
-							<img src="/resources/client/assets/img/examples/studio-1.jpg"
-								class="rounded"> <img
-								src="/resources/client/assets/img/examples/studio-2.jpg"
-								class="rounded">
-						</div>
-						<div class="col-md-3 mr-auto">
-							<img src="/resources/client/assets/img/examples/studio-5.jpg"
-								class="rounded"> <img
-								src="/resources/client/assets/img/examples/studio-4.jpg"
-								class="rounded">
-						</div>
-					</div>
+		<div class="tab-pane active text-center gallery" id="MyRecipe">
+		
+			<div class="row" style="position: relative; margin-left: 200px;" >
+				
+		        <%for(Recipe recipe : recipeList){ %>
+		
+		        <div style="width: 200px; height: 370px; float: left; margin: 0px 2.5rem; margin-left: 2.5rem; text-align: center; cursor: pointer;" onClick="location.href='/client/detail?recipe_id=<%=recipe.getRecipe_id()%>';">
+		        	<%if(recipe.getRecipe_img().equals("none")){ %>
+		        	<img src="/resources/client/assets/img/noimage.jpg" alt="Rounded Image" class="rounded img-fluid" style="width: 200px; height: 200px">
+		        	<%}else{ %>
+		          	<img src="/resources/data/<%=recipe.getRecipe_img() %>" alt="Rounded Image" class="rounded img-fluid" style="width: 200px; height: 200px">
+		          	<%} %>
+		          	<h3 class="title" style="text-align: center;"><%=recipe.getRecipe_name() %></h3>
+		          	<h4 style="text-align: right; color: #00bcd4"><%=recipe.getMember().getUser_nickname() %> / <%=recipe.getRecipe_date() %></h4>
+		        </div>
+		        
+		        <%} %>
+	        
+	        
+	      </div>
+				
 				</div>
 
 				<!-- comment -->
@@ -147,17 +155,17 @@ The above copyright notice and this permission notice shall be included in all c
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td>blabla</td>
+									<td>맛있어!</td>
 									<td>2012</td>
 								</tr>
 								<tr>
 									<td>2</td>
-									<td>blabla</td>
+									<td>이건 너무 별론데</td>
 									<td>2012</td>
 								</tr>
 								<tr>
 									<td>3</td>
-									<td>blabla</td>
+									<td>만들기 좀 어렵네요 ㅎ</td>
 									<td>2012</td>
 								</tr>
 							</tbody>
@@ -172,12 +180,31 @@ The above copyright notice and this permission notice shall be included in all c
 
 
 
-	<!-- Footer -->
-    <%@ include file="inc/footer.jsp" %>
-    <!-- Footer End -->
-  
-  
-  
+	<footer class="footer footer-default">
+		<div class="container">
+			<nav class="float-left">
+				<ul>
+					<li><a href="https://www.creative-tim.com/"> Creative Tim
+					</a></li>
+					<li><a href="https://www.creative-tim.com/presentation">
+							About Us </a></li>
+					<li><a href="https://www.creative-tim.com/blog"> Blog </a></li>
+					<li><a href="https://www.creative-tim.com/license">
+							Licenses </a></li>
+				</ul>
+			</nav>
+			<div class="copyright float-right">
+				&copy;
+				<script>
+					document.write(new Date().getFullYear())
+				</script>
+				, made with <i class="material-icons">favorite</i> by <a
+					href="https://www.creative-tim.com/" target="_blank">Creative
+					Tim</a> for a better web.
+			</div>
+		</div>
+
+	</footer>
 	<!--   Core JS Files   -->
 	<script src="/resources/client/assets/js/core/jquery.min.js"
 		type="text/javascript"></script>
@@ -201,3 +228,4 @@ The above copyright notice and this permission notice shall be included in all c
 </body>
 
 </html>
+			
